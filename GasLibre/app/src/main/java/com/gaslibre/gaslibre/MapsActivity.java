@@ -8,15 +8,29 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import Control.UserController;
+
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    private UserController usuarioController= new UserController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //verifica se ususario logado (se tem usuario na sessao)
+        if(!usuarioController.estaLogado()){
+           //caso em que nao estah logado direciona pra tela de login
+
+        }
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+
+
+
+
+
     }
 
     @Override

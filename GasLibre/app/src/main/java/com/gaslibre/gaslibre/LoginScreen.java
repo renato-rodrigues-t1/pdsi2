@@ -14,12 +14,22 @@ public class LoginScreen extends Activity {
         setContentView(R.layout.login);
         inicializaComponentes();
 
+        //String email= textfild.getString
+        //String senha=
+        //userController.autenticaUsuario(email, senha);
+
+       //if s=falso chama tela de registro
+
+        //se naum, direciona p tela de mapa
+
 
     }
 
 
 
     private void inicializaComponentes(){
+        //Texfild email= findById(R.id.email...)
+        // ||               senha...
 
     }
 

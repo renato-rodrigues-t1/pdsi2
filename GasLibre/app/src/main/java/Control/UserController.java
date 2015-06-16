@@ -24,9 +24,14 @@ public class UserController {
         return false;
     }
 
-    public boolean estaLogado() {
+
+
+    public boolean estaLogadoNaSessao() {
         //verifica sessao
         return false;
     }
 
+    public void colocaUsuarioNaSessao(){
+
+    }
 }

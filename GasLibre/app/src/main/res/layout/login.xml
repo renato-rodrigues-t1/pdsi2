@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#d9d9d7"
     android:weightSum="1"
-    android:id="@+id/">
+    android:id="@+id/loginScreen">
 
     >
 
@@ -23,6 +23,22 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.08"
         android:autoText="false" />
+<!--
+
+so tem na tela de registro
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="usuario"
+        android:id="@+id/nameUsuario" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameUsuarioEdit" />
+
+
+        -->
 
     <TextView
         android:layout_width="wrap_content"

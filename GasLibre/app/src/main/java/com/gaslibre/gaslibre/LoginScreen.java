@@ -12,6 +12,14 @@ public class LoginScreen extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        inicializaComponentes();
+
+
+    }
+
+
+
+    private void inicializaComponentes(){
 
     }
 

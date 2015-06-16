@@ -4,7 +4,9 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d9d9d7">
+    android:background="#d9d9d7"
+    android:weightSum="1"
+    android:id="@+id/">
 
     >
 
@@ -13,9 +15,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faca Login"
+        android:id="@+id/login"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.08"
+        android:autoText="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="usuario"
+        android:id="@+id/emailUsuario" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="senha"
+        android:id="@+id/textView2" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/botaoLogin" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="registrar"
+        android:id="@+id/botaoRegistrar" />
 
 </LinearLayout>

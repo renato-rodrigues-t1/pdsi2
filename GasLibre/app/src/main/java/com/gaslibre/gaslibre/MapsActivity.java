@@ -2,7 +2,7 @@ package com.gaslibre.gaslibre;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
+import android.content.Intent;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,15 +21,11 @@ public class MapsActivity extends FragmentActivity {
         //verifica se ususario logado (se tem usuario na sessao)
         if(!usuarioController.estaLogado()){
            //caso em que nao estah logado direciona pra tela de login
+            chamaTelaDeLogin();
 
         }
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-
-
-
-
-
 
     }
 
@@ -76,4 +72,11 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
+
+    private void chamaTelaDeLogin(){
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

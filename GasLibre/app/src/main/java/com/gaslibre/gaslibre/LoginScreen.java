@@ -14,6 +14,7 @@ public class LoginScreen extends Activity {
         setContentView(R.layout.login);
         inicializaComponentes();
 
+
         //String email= textfild.getString
         //String senha=
         //userController.autenticaUsuario(email, senha);

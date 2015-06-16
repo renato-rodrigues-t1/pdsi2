@@ -19,7 +19,7 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         //verifica se ususario logado (se tem usuario na sessao)
-        if(!usuarioController.estaLogado()){
+        if(!usuarioController.estaLogadoNaSessao()){
            //caso em que nao estah logado direciona pra tela de login
             chamaTelaDeLogin();
 

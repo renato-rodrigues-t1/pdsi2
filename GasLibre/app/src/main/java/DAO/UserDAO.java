@@ -65,25 +65,31 @@ public class UserDAO {
 	}
 	
 	//assuming the table has only one user
-	public User getUSER() {
+	public User AutenticaUsuario(String email, String senha) {
 		User user = null;
 		String selectQuery =
                 " select *"
 				+ " from " + DBManager.TABLE_USER;
-		
+
+            String selectQueryWhere = " where "
+                    + columnsTableUSER[2] + " = '" + email + "' "
+                    +" AND "
+                    +columnsTableUSER[3] + " = '" + senha + "' ";
+
 		open();
-		Cursor cursor = database.rawQuery(selectQuery, null);
-		if(cursor.moveToFirst())
-			user = new User(cursor.getString(0).toString(), cursor.getString(1).toString(), cursor.getString(2).toString(),cursor.getString(3).toString());
+		Cursor cursor = database.rawQuery(selectQuery + selectQueryWhere, null);
+		if(cursor.moveToFirst()) {
+            try{
+                user = new User(cursor.getString(0).toString(), cursor.getString(1).toString(), cursor.getString(2).toString(), cursor.getString(3).toString());
+            }catch(Exception e){
+                Log.e("DATABASE", "erro tentando recuperar usuario");
+            }
+        }
 		close();
 		return user;
 	}
 
     public boolean update(User user){
-        return false;
-    }
-
-    public boolean AutenticaUsuario(String email, String senha){
         return false;
     }
 

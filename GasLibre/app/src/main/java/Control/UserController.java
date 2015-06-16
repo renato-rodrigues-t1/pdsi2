@@ -14,9 +14,9 @@ public class UserController {
     UserDAO userDao= new UserDAO(context);
 
     public boolean autenticaUsuario( String email, String senha ){
-        // pega retorno do banco
-           userDao.AutenticaUsuario(email, senha);
-        return false;
+           if(userDao.AutenticaUsuario(email, senha) == null)
+                return false;
+        return true;
     }
 
     public boolean registraUsuario(String name, String email, String senha){

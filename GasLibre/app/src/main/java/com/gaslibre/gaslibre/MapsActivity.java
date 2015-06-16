@@ -9,14 +9,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import Control.UserController;
+import DAO.DBManager;
+import android.content.Context;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private UserController usuarioController= new UserController();
+    private DBManager dbManager;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbManager= new DBManager(context);//inicializa as tabelas se naum existem.
 
         //verifica se ususario logado (se tem usuario na sessao)
         if(!usuarioController.estaLogadoNaSessao()){

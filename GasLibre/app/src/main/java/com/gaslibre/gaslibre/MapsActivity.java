@@ -20,16 +20,17 @@ public class MapsActivity extends FragmentActivity {
     private UserController usuarioController= new UserController();
     private DBManager dbManager;
     private Context context;
+    //osvaldo teste
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbManager= new DBManager(context);//inicializa as tabelas se naum existem.
 
         //verifica se ususario logado (se tem usuario na sessao)
-        /* if(!usuarioController.estaLogadoNaSessao()){
+         if(!usuarioController.estaLogadoNaSessao()){
            //caso em que nao estah logado direciona pra tela de login
             chamaTelaDeLogin();
-        } */
+        } 
 
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();

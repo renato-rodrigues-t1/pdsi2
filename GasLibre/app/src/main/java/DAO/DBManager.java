@@ -34,7 +34,7 @@ public class DBManager extends SQLiteOpenHelper {
 				+ TABLE_USER_ID + " integer primary key AUTOINCREMENT,"
 				+ TABLE_USER_NAME + " text not null,"
                 + TABLE_USER_EMAIL + "  text, "
-                + TABLE_USER_SENHA + " text, "
+                + TABLE_USER_SENHA + " text "
 				+ ");";
 
 		public DBManager(Context context) {

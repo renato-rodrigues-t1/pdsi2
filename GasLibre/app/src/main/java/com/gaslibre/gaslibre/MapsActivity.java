@@ -17,14 +17,13 @@ import android.content.Context;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private UserController usuarioController= new UserController();
+    private UserController usuarioController= new UserController(this);
     private DBManager dbManager;
     private Context context;
     //osvaldo teste
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbManager= new DBManager(context);//inicializa as tabelas se naum existem.
 
         //verifica se ususario logado (se tem usuario na sessao)
          if(!usuarioController.estaLogadoNaSessao()){

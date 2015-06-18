@@ -1,4 +1,5 @@
 package com.gaslibre.gaslibre;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -14,12 +15,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by renato on 6/15/15.
  */
 public class LoginScreen extends Activity implements View.OnClickListener {
     private UserDAO userDAO= new UserDAO(this);
+    private UserController u;
+
     private TextView textoUsuauio;
     private TextView textoSenha;
     private EditText editUser;
@@ -31,10 +35,11 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        u= new UserController(getContext());
         DBManager dbManager= new DBManager(this);//inicializa as tabelas se naum existem.
 
         inicializaComponentes();
-        //test();
+        test();
         //String email= textfild.getString
         //String senha=
         //userController.autenticaUsuario(email, senha);
@@ -54,28 +59,71 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         buttonLogin= (Button) findViewById(R.id.botaoLogin);
         buttonRegistrar= (Button) findViewById(R.id.botaoRegistrar);
 
+        buttonLogin.setOnClickListener((View.OnClickListener)this);
+        buttonRegistrar.setOnClickListener((View.OnClickListener)this);
+
     }
 
     public Context getContext(){
         return this.getApplicationContext();
     }
 
-    
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.botaoLogin:
 
+                String usuarioEntrado= editUser.getText().toString();
+                String senhaEntrada= editSenha.getText().toString();
+                if(u.autenticaUsuario(usuarioEntrado, senhaEntrada)){
+                    u.colocaUsuarioNaSessao(new User());
+                    chamaTelaMapa();
+                }
+
+                else
+                    erroDeLogin();
+                break;
+
+            case R.id.botaoRegistrar:
+                    chamaTelaRegistro();
+
+                break;
+        }
+    }
+
+    private void chamaTelaMapa(){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void chamaTelaRegistro(){
+        Intent intent = new Intent(this, RegistroScreen.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void erroDeLogin(){
+        Context context = getApplicationContext();
+        CharSequence text = "Usuario ou senha invalidos, por favor verifique dados ouregistre-se";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
     private void test(){
-        User userTemp= new User("Bruno Ernandes", "higor.rsufu@gmail.com", "1234");
+        User userTemp= new User("Bruno Ernandes", "renato.rsufu@gmail.com", "1234");
         Log.v("USER>>>", userTemp.getName()+"- "+userTemp.getEmail()+"- "+userTemp.getSenha());
 
         //userDAO.registraUsuario(userTemp);
         //User newUser= userDAO.AutenticaUsuario(userTemp.getEmail(), userTemp.getSenha());
         //Log.v("DoBANCOUSER>>>", newUser.getId()+"- "+newUser.getEmail()+"- "+newUser.getSenha());
 
-        UserController u= new UserController(getContext());
+
         //como grava um usuario no banco
         u.registraUsuario(userTemp);
 
         //como autentica o usuario pra logar
-        u.autenticaUsuario(userTemp.getEmail(), userTemp.getSenha());
+        //u.autenticaUsuario(userTemp.getEmail(), userTemp.getSenha());
 
     }
 

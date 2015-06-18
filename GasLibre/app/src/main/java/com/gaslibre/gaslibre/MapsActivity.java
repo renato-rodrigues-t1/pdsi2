@@ -29,7 +29,7 @@ public class MapsActivity extends FragmentActivity {
          if(!usuarioController.estaLogadoNaSessao()){
            //caso em que nao estah logado direciona pra tela de login
             chamaTelaDeLogin();
-        } 
+        }
 
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();

@@ -14,6 +14,7 @@ import Model.User;
 public class UserController {
 
     private Context context;
+    public static User userNaSessao= null;
     UserDAO userDao;
 
     public UserController() {
@@ -39,11 +40,14 @@ public class UserController {
     }
 
     public boolean estaLogadoNaSessao() {
-        //verifica sessao
-        return false;
+        if(userNaSessao == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 
-    public void colocaUsuarioNaSessao(){
-        //
+    public void colocaUsuarioNaSessao(User user){
+        userNaSessao= user;
     }
 }

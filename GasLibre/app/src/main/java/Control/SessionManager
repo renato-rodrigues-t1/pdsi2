@@ -28,15 +28,16 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    // User name (make variable public to access from outside)
-    public static final String KEY_NAME = "name";
-
     // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
+    private static final String KEY_EMAIL = "email";
+    
+    // Email address (make variable public to access from outside)
+    private static final Context KEY_CONTEXT = null;
 
     // Constructor
     public SessionManager(Context context){
         this._context = context;
+        this.KEY_CONTEXT = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
@@ -44,15 +45,15 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String email){
+    public void createLoginSession(String email, Context ctx){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
-        // Storing name in pref
-        editor.putString(KEY_NAME, name);
-
         // Storing email in pref
         editor.putString(KEY_EMAIL, email);
+        
+        // Storing context in pref
+        editor.putString(KEY_CONTEXT, ctx);
 
         // commit changes
         editor.commit();
@@ -78,13 +79,12 @@ public class SessionManager {
     /**
      * Get stored session data
      * */
-    public HashMap<String, String> getUserDetails(){
-        HashMap<String, String> user = new HashMap<String, String>();
-        // user name
-        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
-
+    public HashMap<String, Context> getUserDetails(){
+        HashMap<String, Context> user = new HashMap<String, String>();
         // user email id
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
+        // user context
+        user.put(KEY_NAME, pref.getString(KEY_CONTEXT, null));
 
         // return user
         return user;
@@ -100,6 +100,8 @@ public class SessionManager {
 
         // After logout redirect user to Loing Activity
         Intent i = new Intent(_context, LoginScreem.class);
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, false);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

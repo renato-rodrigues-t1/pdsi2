@@ -10,8 +10,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import Control.UserController;
-import DAO.DBManager;
+import com.gaslibre.gaslibre.Control.User.UserController;
+import com.gaslibre.gaslibre.DAO.DBManager;
 import android.content.Context;
 
 public class MapsActivity extends FragmentActivity {

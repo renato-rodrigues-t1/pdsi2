@@ -1,4 +1,4 @@
-package DAO;
+package com.gaslibre.gaslibre.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import Model.User;
+import com.gaslibre.gaslibre.Model.User;
 
 public class UserDAO {
 	

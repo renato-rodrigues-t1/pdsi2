@@ -1,4 +1,4 @@
-package Model;
+package com.gaslibre.gaslibre.Model;
 
 /**
  * Created by renato on 6/15/15.

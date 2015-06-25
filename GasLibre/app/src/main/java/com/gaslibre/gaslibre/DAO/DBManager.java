@@ -3,7 +3,7 @@
  * 
  */
 
-package DAO;
+package com.gaslibre.gaslibre.DAO;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

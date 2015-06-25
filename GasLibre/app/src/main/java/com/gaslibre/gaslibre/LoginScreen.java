@@ -3,6 +3,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+
+import android.app.Activity;
+
+import com.gaslibre.gaslibre.Control.User.UserController;
+import com.gaslibre.gaslibre.DAO.DBManager;
+import com.gaslibre.gaslibre.DAO.UserDAO;
+import com.gaslibre.gaslibre.Model.User;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import Control.UserController;
-import DAO.DBManager;
-import DAO.UserDAO;
-import Model.User;
 
 /**
  * Created by renato on 6/15/15.

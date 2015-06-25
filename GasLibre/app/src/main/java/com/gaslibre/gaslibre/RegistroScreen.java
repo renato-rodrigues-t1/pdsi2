@@ -8,9 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import Control.UserController;
-import DAO.DBManager;
-import Model.User;
+import com.gaslibre.gaslibre.Control.User.UserController;
+import com.gaslibre.gaslibre.Model.User;
 
 /**
  * Created by renato on 6/17/15.

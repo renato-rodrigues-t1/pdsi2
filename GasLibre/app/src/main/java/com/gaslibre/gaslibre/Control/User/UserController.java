@@ -1,12 +1,10 @@
-package Control;
+package com.gaslibre.gaslibre.Control.User;
 
-import DAO.UserDAO;
+import com.gaslibre.gaslibre.DAO.UserDAO;
 import android.content.Context;
 import android.util.Log;
 
-import com.gaslibre.gaslibre.LoginScreen;
-
-import Model.User;
+import com.gaslibre.gaslibre.Model.User;
 
 /**
  * Created by renato on 6/15/15.
@@ -46,6 +44,8 @@ public class UserController {
             return true;
         }
     }
+
+
 
     public void colocaUsuarioNaSessao(User user){
         userNaSessao= user;

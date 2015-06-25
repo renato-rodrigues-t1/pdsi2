@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -37,8 +36,8 @@ import com.google.android.gms.common.SignInButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import Control.UserController;
-import Model.User;
+import com.gaslibre.gaslibre.Control.User.UserController;
+import com.gaslibre.gaslibre.Model.User;
 
 
 /**

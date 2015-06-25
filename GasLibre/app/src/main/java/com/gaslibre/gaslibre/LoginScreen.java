@@ -1,21 +1,19 @@
 package com.gaslibre.gaslibre;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.app.Activity;
-
-import Control.UserController;
-import DAO.DBManager;
-import DAO.UserDAO;
-import Model.User;
 import android.util.Log;
-
-import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import Control.UserController;
+import DAO.DBManager;
+import DAO.UserDAO;
+import Model.User;
 
 /**
  * Created by renato on 6/15/15.
@@ -51,6 +49,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     }
 
     private void inicializaComponentes() {
+        //teste commit Osvaldo
 
         textoUsuauio= (TextView)findViewById(R.id.textoUsuario);
         textoSenha= (TextView)findViewById(R.id.textSenha);

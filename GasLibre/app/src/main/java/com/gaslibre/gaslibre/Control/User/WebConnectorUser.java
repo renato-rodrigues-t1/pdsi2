@@ -89,10 +89,10 @@ public class WebConnectorUser {
                         JSONObject objectUser = objJson.getJSONObject("User");
 
                         // Retrieving data from server
-                        userReturn.setId(objectUser.getString("id"));
-                        userReturn.setName(objectUser.getString("name").toString());
-                        userReturn.setEmail(objectUser.getString("email").toString());
-                        userReturn.setSenha(objectUser.getString("senha").toString());
+                        userReturn.setId("1");
+                        userReturn.setName(objectUser.getString("Nome").toString());
+                        userReturn.setEmail(objectUser.getString("Email").toString());
+                        userReturn.setSenha(objectUser.getString("Senha").toString());
 
                 }
             } catch (JSONException e) {

@@ -4,16 +4,12 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d9d9d7"
+    android:background="@drawable/fundodetela"
     android:weightSum="1"
-    android:id="@+id/loginScreen">
+    android:id="@+id/loginScreen"
+    android:baselineAligned="true">
 
     >
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +19,47 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.08"
         android:autoText="false" />
-<!--
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|end"
+        android:layout_marginTop="320dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editUsuario"
+            android:hint="user"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editSenha"
+            android:gravity="center_horizontal"
+            android:hint="password" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/botaoLogin"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="registrar"
+            android:id="@+id/botaoRegistrar"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_green_dark" />
+    </LinearLayout>
+
+    <!--
 
 so tem na tela de registro
     <TextView
@@ -39,39 +75,5 @@ so tem na tela de registro
 
 
         -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="usuario"
-        android:id="@+id/textoUsuario" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editUsuario" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="senha"
-        android:id="@+id/textSenha" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editSenha" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/botaoLogin" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="registrar"
-        android:id="@+id/botaoRegistrar" />
 
 </LinearLayout>

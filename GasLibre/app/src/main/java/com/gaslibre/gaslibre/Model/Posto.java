@@ -14,6 +14,9 @@ public class Posto {
     private float coordenateY;
     private String classificacao;
 
+    public Posto() {
+    }
+
     public Posto(int id, float gasolina, float etanol, float diesel, String servico, String endereco, float coordenateX, float coordenateY, String classificacao) {
         this.id = id;
         this.gasolina = gasolina;

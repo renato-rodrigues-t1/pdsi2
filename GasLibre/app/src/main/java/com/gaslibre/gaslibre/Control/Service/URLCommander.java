@@ -8,7 +8,7 @@ public class URLCommander {
 
     private static URLCommander urlCommanderSingleton;
 
-    private String serverURL= "http://52.24.179.139/macaw/";
+    private String serverURL= "http://.../";
 
     private String urlUsers= "users/";
     private String urlReports= "reports/";
@@ -63,4 +63,11 @@ public class URLCommander {
         return getURLUsers()+"getUser/";
     }
 
+    public String getURLLogin(){
+        return "";
+    }
+
+    public String getURLBuscaPosto(){
+        return "";
+    }
 }

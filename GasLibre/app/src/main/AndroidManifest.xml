@@ -57,6 +57,14 @@
             android:label="registro"
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
+        <activity
+            android:name=".Busca_Posto"
+            android:label="@string/title_activity_busca__posto" >
+        </activity>
+        <activity
+            android:name=".Ver_postos"
+            android:label="@string/title_activity_ver_postos" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,5 +3,10 @@
 
     <string name="app_name">GasLibre</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_busca__posto">Busca_Posto</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_ver_postos">ver_postos</string>
 
 </resources>

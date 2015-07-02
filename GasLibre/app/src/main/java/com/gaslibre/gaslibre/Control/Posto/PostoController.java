@@ -2,8 +2,9 @@ package com.gaslibre.gaslibre.Control.Posto;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import com.gaslibre.gaslibre.Model.Posto;
+
+import java.util.ArrayList;
 
 /**
  * Created by renato on 6/25/15.
@@ -15,7 +16,7 @@ public class PostoController {
     //diesel= 3
 
     private Context context;
-
+    public static int combustivel;
 
 
     public ArrayList<Posto> buscaPostos(int combustivel, float coordenateX, float coordenateY){

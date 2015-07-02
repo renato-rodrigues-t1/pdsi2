@@ -84,7 +84,7 @@ public class WebConnector {
             conn.disconnect();
 
         } catch (Exception e) {
-            Log.e("WsRest", "Erro de Conex„o: " + e.toString() );
+            Log.e("WsRest", "Connection Error: " + e.toString() );
         }
         return response;
 

@@ -19,7 +19,7 @@ public class WebConnectorUser {
 
     private WebConnector webConnector;
     private UserDAO userDao;
-    private Context context;
+    public static Context context;
 
     private static WebConnectorUser instance;
 
@@ -62,26 +62,28 @@ public class WebConnectorUser {
         WebConnectorUser.instance = instance;
     }
 
+    public User getUserServer(String email, String senha){
 
-
-    private String urlLogin= "";
-
-    public User getUserServer(User user){
+        String urlLogin= URLCommander.getInstance().getURLLogin(email, senha);
             String result = "";
-            User userReturn= new User();
+            User userReturn= null;
 
-            Log.v("URL>>>>>>>",urlLogin);
+            Log.v("URLcUSER>>>>>>>",urlLogin);
 
         try {
                 Object[] array = { urlLogin, "GET" };
                 result = (new GetRESTFile()).connect(array);
-
+            Log.v("result",result);
                 if(!result.equals("-1")){
-                    JSONArray jsonArray = new JSONArray(result);
+                    userReturn= new User();
+
+                    /*JSONArray jsonArray = new JSONArray(result);
 
                     if (jsonArray.length() == 0) {
-                        return userReturn;
+                        return userReturn= null;
                     }
+
+                    userReturn= new User();
                         //userReturn = new User();
                         JSONObject objJson = new JSONObject(jsonArray.getString(0));
 
@@ -93,11 +95,11 @@ public class WebConnectorUser {
                         userReturn.setName(objectUser.getString("Nome").toString());
                         userReturn.setEmail(objectUser.getString("Email").toString());
                         userReturn.setSenha(objectUser.getString("Senha").toString());
-
+*/
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-                return null;
+                return userReturn;
             }
             return userReturn;
         }

@@ -18,6 +18,9 @@ public class PostoController {
     private Context context;
     public static int combustivel;
 
+    public PostoController(Context context) {
+        this.context = context;
+    }
 
     public ArrayList<Posto> buscaPostos(int combustivel, float coordenateX, float coordenateY){
 

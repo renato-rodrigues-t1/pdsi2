@@ -1,5 +1,8 @@
 package com.gaslibre.gaslibre;
 
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -78,8 +81,36 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-18.901882, -48.307472)).title("Marker"));
-        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng( -18.901882, -48.307472) , 14.0f) );
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
+
+        //Habilita MyLocation para o Maps
+        mMap.setMyLocationEnabled(true);
+
+        //Pega o objeto ~LocationManager~ do System Service ~LOCATION_SERVICE~
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //Criteria é uma classe que indica os critérios de aplicação para a seleção de um provedor de localização
+        Criteria localizacao = new Criteria();
+
+        // Pega o nome do melhor provedor
+        String provedor = locationManager.getBestProvider(localizacao, true);
+
+        //Pegar localização corrente
+        Location meuLocal = locationManager.getLastKnownLocation(provedor);
+
+        //Indica o tipo do mapa
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        double latitude = meuLocal.getLatitude();
+        double longitude = meuLocal.getLongitude();
+
+        LatLng latlong = new LatLng(latitude,longitude);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlong));
+
+        //Zoom e localização do caboco no Maps
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("Você está aqui!"));
 
     }
 

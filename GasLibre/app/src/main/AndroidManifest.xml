@@ -65,6 +65,14 @@
             android:name=".Ver_postos"
             android:label="@string/title_activity_ver_postos" >
         </activity>
+        <activity
+            android:name=".Listar_Postos"
+            android:label="@string/title_activity_listar__postos" >
+        </activity>
+        <activity
+            android:name=".Menu_Opcoes"
+            android:label="@string/title_activity_menu__opcoes" >
+        </activity>
     </application>
 
 </manifest>

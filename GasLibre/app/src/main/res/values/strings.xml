@@ -4,11 +4,14 @@
     <string name="app_name">GasLibre</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_busca__posto">Busca_Posto</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_ver_postos">ver_postos</string>
+<<<<<<< HEAD
     <string name="title_activity_listar__postos">Listar_Postos</string>
     <string name="title_activity_menu__opcoes">Menu_Opcoes</string>
+=======
+    <string name="title_activity_lista">lista</string>
+>>>>>>> origin/master
 
 </resources>

@@ -1,5 +1,6 @@
 package com.gaslibre.gaslibre.Control.User;
 
+import com.gaslibre.gaslibre.Control.Service.WebConnector;
 import com.gaslibre.gaslibre.DAO.UserDAO;
 import android.content.Context;
 import android.util.Log;
@@ -29,6 +30,12 @@ public class UserController {
                 return false;
         Log.v("USERBANCO;;;;;;;;",retorno.getId()+ "- "+ retorno.getName());
         return true;
+    }
+
+    public User autenticaUsuarioServer(Context context, String email, String senha){
+        WebConnectorUser.context= context;
+        return WebConnectorUser.getInstance(context).getUserServer(email, senha);
+
     }
 
     public boolean registraUsuario(User userTemp){

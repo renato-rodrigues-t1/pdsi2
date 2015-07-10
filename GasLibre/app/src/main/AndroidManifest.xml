@@ -62,8 +62,8 @@
             android:label="@string/title_activity_busca__posto" >
         </activity>
         <activity
-            android:name=".Ver_postos"
-            android:label="@string/title_activity_ver_postos" >
+            android:name=".lista"
+            android:label="@string/title_activity_lista" >
         </activity>
         <activity
             android:name=".Listar_Postos"

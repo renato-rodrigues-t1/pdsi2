@@ -1,7 +1,9 @@
 package com.gaslibre.gaslibre;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 
@@ -32,6 +34,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private EditText editSenha;
     private Button buttonLogin;
     private Button buttonRegistrar;
+    protected static boolean erro= false;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,7 +44,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         DBManager dbManager= new DBManager(this);//inicializa as tabelas se naum existem.
 
         inicializaComponentes();
-        test();
+        //test();
         //String email= textfild.getString
         //String senha=
         //userController.autenticaUsuario(email, senha);
@@ -77,13 +80,13 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
                 String usuarioEntrado= editUser.getText().toString();
                 String senhaEntrada= editSenha.getText().toString();
-                if(u.autenticaUsuario(usuarioEntrado, senhaEntrada)){
-                    u.colocaUsuarioNaSessao(new User());
-                    chamaTelaMapa();
+                GetUserAsyncTask getAsync= new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
+                getAsync.execute();
+                if(erro!=false){
+                    Log.v("","");
+                    erroDeLogin();
                 }
 
-                else
-                    erroDeLogin();
                 break;
 
             case R.id.botaoRegistrar:
@@ -95,6 +98,12 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
     private void chamaTelaMapa(){
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void chamaTelaBusca(){
+        Intent intent = new Intent(this, Busca_Posto.class);
         startActivity(intent);
         finish();
     }
@@ -128,6 +137,60 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         //como autentica o usuario pra logar
         //u.autenticaUsuario(userTemp.getEmail(), userTemp.getSenha());
 
+    }
+
+    private class GetUserAsyncTask extends AsyncTask<Void, Void, User> {
+
+        ProgressDialog progressBar;
+        int idUsuario;
+        Context context;
+        String email, senha;
+
+        private GetUserAsyncTask(Context context, String email, String senha) {
+            this.context = context;
+            this.email = email;
+            this.senha = senha;
+        }
+
+        public GetUserAsyncTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.abc_action_bar_home_description),
+                    getApplicationContext().getString(R.string.abc_action_bar_home_description_format));
+            progressBar.hide();
+        }
+
+        @Override
+        protected User doInBackground(Void... params) {
+            User retorno= u.autenticaUsuarioServer(this.context, this.email, this.senha);
+
+            if(retorno!=null){
+                u.colocaUsuarioNaSessao(new User());
+                Log.v("login", "deu certo");
+                erro= false;
+                chamaTelaBusca();
+            }else{
+                Log.v("login", "nulo");
+                erro= true;
+                //erroDeLogin();
+            }
+
+            /*User u;//= new User();
+            u= UsersController.getInstance().getUserServer(userLocal);
+            Log.v("Vindo do Server======", u.getName());
+            return u;*/
+            return retorno;
+
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            progressBar.dismiss();
+        }
     }
 
 }

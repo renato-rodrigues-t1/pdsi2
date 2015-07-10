@@ -27,11 +27,12 @@ public class WebConnectorPosto {
 
     private static WebConnectorPosto instance;
 
-    private WebConnectorPosto(){}
+    private WebConnectorPosto() {
+    }
 
-    public static WebConnectorPosto getInstance(Context context){
-        if(instance==null){
-            instance= new WebConnectorPosto();
+    public static WebConnectorPosto getInstance(Context context) {
+        if (instance == null) {
+            instance = new WebConnectorPosto();
             instance.setWebConnector(new WebConnector());
             instance.setContext(context);
         }
@@ -71,59 +72,69 @@ public class WebConnectorPosto {
     It is only called if its not the first login. Users just signed up does not have idServer until the first persistence.
      */
 
-public ArrayList<Posto> buscaPostos(int combustivel, float coordenateX, float coordenateY){
-    String result = "";
-    //notificacaoDao = new NotificacaoDAO(contexto);
-    //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
-
-    String url = URLCommander.getInstance().getURLBuscaPosto()+"/"+combustivel+"/"+coordenateX+"/"+coordenateY ;
-    ArrayList<Posto> postos = new ArrayList<Posto>();
-
-    try {
-        Object[] array = { url, "GET" };
-        result = (new GetRESTFile()).connect(array);
-
-        if(!result.equals("-1")){
-            JSONArray jsonArray = new JSONArray(result);
-
-            if (jsonArray.length() == 0) {
-                return postos;
-            }
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                Posto posto = new Posto();
-                JSONObject objJson = new JSONObject(jsonArray.getString(i));
-
-                // JsonObjects
-                JSONObject objectPosto = objJson.getJSONObject("Posto");
-
-                // Recebendo Dados
-                posto.setClassificacao(objectPosto.getString("classificacao").toString());
-                posto.setCoordenateX(Integer.parseInt(objectPosto.getString("coordenadaX")));
-                posto.setCoordenateY(Integer.parseInt(objJson.getString("coordenadaY")));
-                posto.setDiesel(Integer.parseInt(objectPosto.getString("diesel")));
-                posto.setGasolina((Integer.parseInt(objectPosto.getString("gasolina"))));
-                posto.setEtanol(Integer.parseInt(objectPosto.getString("etanol")));
-                posto.setEndereco(objectPosto.getString("endereco").toString());
-                posto.setId(Integer.parseInt(objectPosto.getString("id")));
-                posto.setServico(objectPosto.getString("servico").toString());
-
-                postos.add(posto);
-            }
+    public ArrayList<Posto> buscaPostos(int combustivel, float coordenateX, float coordenateY) {
+        String result = "";
+        //notificacaoDao = new NotificacaoDAO(contexto);
+        //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
+        String combustivelString = "";
+        if (combustivel == 1) {
+            combustivelString = "gas";
+        } else if (combustivel == 2) {
+            combustivelString = "alc";
+        } else if (combustivel == 3) {
+            combustivelString = "die";
         }
-    } catch (JSONException e) {
-        e.printStackTrace();
-        return null;
+
+        String url = URLCommander.getInstance().getURLBuscaPosto(combustivelString);
+        Log.v("URL-------->",url);
+        ArrayList<Posto> postos = new ArrayList<Posto>();
+
+        try {
+            Object[] array = {url, "GET"};
+            result = (new GetRESTFile()).connect(array);
+
+            if (!result.equals("-1")) {
+                JSONArray jsonArray = new JSONArray(result);
+
+                if (jsonArray.length() == 0) {
+                    return postos;
+                }
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Posto posto = new Posto();
+                    JSONObject objJson = new JSONObject(jsonArray.getString(i));
+
+                    // JsonObjects
+                    JSONObject objectPosto = objJson.getJSONObject("Posto");
+
+                    // Recebendo Dados
+                    posto.setClassificacao(objectPosto.getString("classificacao").toString());
+                    posto.setCoordenateX(Integer.parseInt(objectPosto.getString("coordenadaX")));
+                    posto.setCoordenateY(Integer.parseInt(objJson.getString("coordenadaY")));
+                    posto.setDiesel(Integer.parseInt(objectPosto.getString("diesel")));
+                    posto.setGasolina((Integer.parseInt(objectPosto.getString("gasolina"))));
+                    posto.setEtanol(Integer.parseInt(objectPosto.getString("etanol")));
+                    posto.setEndereco(objectPosto.getString("endereco").toString());
+                    posto.setId(Integer.parseInt(objectPosto.getString("id")));
+                    posto.setServico(objectPosto.getString("servico").toString());
+
+                    postos.add(posto);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return postos;
     }
-    return postos;
 }
 
-    public ArrayList<Posto> buscaPostosByServico(String servico){
+    /*public ArrayList<Posto> buscaPostosByServico(String servico){
         String result = "";
         //notificacaoDao = new NotificacaoDAO(contexto);
         //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
 
-        String url = URLCommander.getInstance().getURLBuscaPosto()+"/"+servico;
+        String url = URLCommander.getInstance().getURLBuscaServico()+"/"+servico;
         ArrayList<Posto> postos = new ArrayList<Posto>();
 
         try {

@@ -8,7 +8,7 @@ public class URLCommander {
 
     private static URLCommander urlCommanderSingleton;
 
-    private String serverURL= "http://.../";
+    private String serverURL= "http://52.24.179.139/";
 
     private String urlUsers= "users/";
     private String urlReports= "reports/";
@@ -63,11 +63,15 @@ public class URLCommander {
         return getURLUsers()+"getUser/";
     }
 
-    public String getURLLogin(){
-        return "";
+    public String getURLLogin(String email, String senha){
+        return serverURL+"pdsi/cont/Requisicao/autentica?email="+email+"&senha="+senha;
     }
 
-    public String getURLBuscaPosto(){
-        return "";
+    public String getURLBuscaPosto(String combustivel){
+        return serverURL+ "pdsi/cont/Requisicao/buscaPostoPorComb?comb="+combustivel;
+    }
+
+    public String getUrlBuscaServico(String servico){
+        return serverURL+"pdsi/cont/Requisicao/buscaPostoPorComb?comb=";
     }
 }

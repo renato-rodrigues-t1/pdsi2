@@ -14,8 +14,16 @@ import android.view.View;
 import android.util.Log;
 
 import com.gaslibre.gaslibre.Control.Posto.PostoController;
+import com.gaslibre.gaslibre.Control.Service.GPSHelper;
+import com.gaslibre.gaslibre.Model.Posto;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Lista extends ActionBarActivity {
+
+    private LatLng LtLg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +107,40 @@ public class Lista extends ActionBarActivity {
         }
     }
 
-    private void montaListaPorDistancia(){
+    private void montaListaPorDistancia() {
+
+        GPSHelper gps = new GPSHelper(this);
+
+        // - Requisição da localização pelo gps
+        gps.getMyLocation();
+
+        double latitude  = gps.getLatitude();
+        double longitude = gps.getLongitude();
+
+        this.LtLg = new LatLng(latitude, longitude);
+
+
+        for(int i = 0; i < PostoController.listaOrdenadaPorPreco.size(); i++) {
+
+            LatLng temp     = new LatLng(PostoController.listaOrdenadaPorPreco.get(i).getCoordenateX(), PostoController.listaOrdenadaPorPreco.get(i).getCoordenateY());
+            double distance = gps.CalculationByDistance(temp, this.LtLg);
+
+            PostoController.listaOrdenadaPorPreco.get(i).setDistance(distance);
+            //this.aviso(String.valueOf(lista.get(i).getDistance()));
+
+        }
+
+        PostoController.listaOrdenadaPorDistancia= PostoController.listaOrdenadaPorPreco;
+
+        // 3 - Ordenação da lista
+        Collections.sort(PostoController.listaOrdenadaPorDistancia, new Comparator<Posto>() {
+            @Override
+            public int compare(Posto p0, Posto p1) {
+                return Double.compare(p0.getDistance(), p1.getDistance());
+            }
+        });
+
+
         RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
         ScrollView scrollView= (ScrollView) findViewById(R.id.scrollView);
         //LinearLayout lista=  (LinearLayout)findViewById(R.id.linearElementsContainer);
@@ -108,31 +149,31 @@ public class Lista extends ActionBarActivity {
         LayoutInflater inflator = (LayoutInflater)this.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
-        for(int i= 0; i< PostoController.listaOrdenadaPorPreco.size(); i++) {
+        for(int i= 0; i< PostoController.listaOrdenadaPorDistancia.size(); i++) {
 
             View item= (View) inflator.inflate(R.layout.item_lista_posto, null);
 
             LinearLayout cadaElementoLista = (LinearLayout) findViewById(R.id.linearEachElement);
             LinearLayout colunaEsquerda = (LinearLayout) findViewById(R.id.colunaEsquerda);
             TextView nomePosto = (TextView) item.findViewById(R.id.nomePosto);
-            nomePosto.setText(PostoController.listaOrdenadaPorPreco.get(i).getName());
+            nomePosto.setText(PostoController.listaOrdenadaPorDistancia.get(i).getName());
             TextView endereco = (TextView) item.findViewById(R.id.endereco);
-            endereco.setText(PostoController.listaOrdenadaPorPreco.get(i).getEndereco());
+            endereco.setText(PostoController.listaOrdenadaPorDistancia.get(i).getEndereco());
             TextView servico = (TextView) item.findViewById(R.id.servicoPosto);
-            servico.setText(PostoController.listaOrdenadaPorPreco.get(i).getServico());
+            servico.setText(PostoController.listaOrdenadaPorDistancia.get(i).getServico());
             LinearLayout colunaDireita = (LinearLayout) findViewById(R.id.colunaDireita);
             TextView preco = (TextView) item.findViewById(R.id.preco);
             switch(PostoController.combustivelPesquisado) {
                 case 1:
-                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getGasolina());
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getGasolina());
                     break;
 
                 case 2:
-                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getEtanol());
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getEtanol());
                     break;
 
                 case 3:
-                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getDiesel());
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getDiesel());
                     break;
             }
 

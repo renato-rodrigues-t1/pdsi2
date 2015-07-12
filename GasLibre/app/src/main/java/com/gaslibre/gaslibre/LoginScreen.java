@@ -34,11 +34,18 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private Button buttonLogin;
     private Button buttonRegistrar;
     protected static boolean erro= false;
+    protected UserController usuarioController= new UserController();
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        //verifica se ususario logado (se tem usuario na sessao)
+        if(usuarioController.estaLogadoNaSessao()){
+            //caso em que nao estah logado direciona pra tela de login
+            chamaTelaBusca();
+        }
+
         u= new UserController(getContext());
         DBManager dbManager= new DBManager(this);//inicializa as tabelas se naum existem.
 

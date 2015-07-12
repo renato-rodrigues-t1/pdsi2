@@ -37,20 +37,16 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
+
+        </activity>
+        <activity
+            android:name=".LoginScreen"
+            android:label="Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".LoginScreen"
-            android:label="Login" >
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
             android:name=".RegistroScreen"

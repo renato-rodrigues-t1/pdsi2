@@ -1,38 +1,103 @@
 package com.gaslibre.gaslibre;
 
+import android.location.Address;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.content.Intent;
 
+import com.gaslibre.gaslibre.Model.Posto;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.gaslibre.gaslibre.Control.User.UserController;
+import com.gaslibre.gaslibre.Control.Service.GPSHelper;
 import com.gaslibre.gaslibre.DAO.DBManager;
 import android.content.Context;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import android.util.Log;
 
-public class MapsActivity extends FragmentActivity {
+import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class MapsActivity extends FragmentActivity implements View.OnClickListener {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private UserController usuarioController= new UserController(this);
     private DBManager dbManager;
     private Context context;
-    //osvaldo teste
+    private int i;
+
+    private LatLng LtLg;
+
+    private Button buttonNavegar;
+
+    private void inicializaComponentes() {
+
+        buttonNavegar = (Button) findViewById(R.id.BtNavegar);
+        buttonNavegar.setOnClickListener((View.OnClickListener)this);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //verifica se ususario logado (se tem usuario na sessao)
-         if(!usuarioController.estaLogadoNaSessao()){
-           //caso em que nao estah logado direciona pra tela de login
-            chamaTelaDeLogin();
+        GPSHelper gps = new GPSHelper(this);
+
+        // - Requisição da localização pelo gps
+        gps.getMyLocation();
+
+        double latitude  = gps.getLatitude();
+        double longitude = gps.getLongitude();
+
+        this.LtLg = new LatLng(latitude, longitude);
+
+        // - Calculo da distância
+       /* LatLng Posto = new LatLng(-18.921052, -48.257157);
+
+       double temp = this.CalculationByDistance(this.LtLg, Posto);
+       this.aviso(String.valueOf(temp)); */
+
+        // - Exemplo do calculo das distancias executadas
+
+        // 1 - Recepção dos dados -> construção do arraylist com os valores
+        //Posto P1 = new Posto(1, 3.80, 2.99, 3.00, "nada", "perto da ufu", -17.921052, -49.257157, "10", 0);
+        //Posto P2 = new Posto(2, 3.85, 2.97, 3.10, "nada2", "perto da ufu 2", -18.921052, -48.257157, "9", 0);
+
+
+        List<Posto> lista = new ArrayList<Posto>();
+        //lista.add(P1);
+        //lista.add(P2);
+
+        // 2 - Iteração do arraylist, calculo da distância
+
+
+
+        // - Postos ordenados
+        for(i = 0; i < lista.size(); i++) {
+
+            this.aviso(String.valueOf(lista.get(i).getDistance()));
+
         }
 
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+
+
+        inicializaComponentes();
+        // - Adiciconando marcador - exemplo
+        addMarkerMap(-18.921052, -48.257157);
 
     }
 
@@ -70,6 +135,8 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
+
+
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
@@ -78,8 +145,8 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(-18.901882, -48.307472)).title("Marker"));
-        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng( -18.901882, -48.307472) , 14.0f) );
+        mMap.addMarker(new MarkerOptions().position(this.LtLg).title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(this.LtLg, 14.0f));
 
     }
 
@@ -89,4 +156,49 @@ public class MapsActivity extends FragmentActivity {
         finish();
     }
 
+    private void aviso(CharSequence text) {
+
+        Context context = getApplicationContext();
+        //CharSequence text = "Usuario ou senha invalidos, por favor verifique dados ouregistre-se";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch(view.getId()) {
+            case R.id.BtNavegar:
+                AbreNavegacao();
+                break;
+        }
+    }
+
+    public void addMarkerMap(double lat, double log) {
+
+        LatLng temp = new LatLng(lat, log);
+
+        // - Adicionando o marcador do posto
+        mMap.addMarker(new MarkerOptions()
+                .position(temp)
+                .title("Marker")
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+
+    }
+
+
+    public void AbreNavegacao() {
+
+
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=-18.921052, -48.257157");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
+    }
 }
+

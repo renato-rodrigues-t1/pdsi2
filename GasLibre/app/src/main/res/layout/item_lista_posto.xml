@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="false">
 
     <LinearLayout
         android:id="@+id/linearEachElement"
@@ -11,18 +12,17 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:gravity="center_vertical"
-        android:clickable="true"
+        android:clickable="false"
         android:divider="@android:color/holo_green_light"
         android:dividerPadding="30dp"
         android:elevation="3dp"
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:nestedScrollingEnabled="false"
-        android:onClick="onClick"
         android:showDividers="beginning|end"
         android:textAlignment="center"
         android:theme="@android:style/Theme.Panel"
-        android:touchscreenBlocksFocus="true"
+        android:touchscreenBlocksFocus="false"
         android:background="#20ffffff">
 
         <LinearLayout
@@ -83,6 +83,22 @@
                 android:singleLine="true"
                 android:id="@+id/preco"
                 android:layout_gravity="left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="coordenada_x"
+                android:id="@+id/corrdenada_x"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="coordenada_y"
+                android:id="@+id/coordenada_y"
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>

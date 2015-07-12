@@ -41,7 +41,7 @@
         </activity>
         <activity
             android:name=".LoginScreen"
-            android:label="Login" >
+            android:label="GasLibre" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

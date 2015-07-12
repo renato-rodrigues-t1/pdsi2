@@ -63,41 +63,14 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
 
         this.LtLg = new LatLng(latitude, longitude);
 
-        // - Calculo da distância
-       /* LatLng Posto = new LatLng(-18.921052, -48.257157);
-
-       double temp = this.CalculationByDistance(this.LtLg, Posto);
-       this.aviso(String.valueOf(temp)); */
-
-        // - Exemplo do calculo das distancias executadas
-
-        // 1 - Recepção dos dados -> construção do arraylist com os valores
-        //Posto P1 = new Posto(1, 3.80, 2.99, 3.00, "nada", "perto da ufu", -17.921052, -49.257157, "10", 0);
-        //Posto P2 = new Posto(2, 3.85, 2.97, 3.10, "nada2", "perto da ufu 2", -18.921052, -48.257157, "9", 0);
-
-
-        List<Posto> lista = new ArrayList<Posto>();
-        //lista.add(P1);
-        //lista.add(P2);
-
-        // 2 - Iteração do arraylist, calculo da distância
-
-
-
-        // - Postos ordenados
-        for(i = 0; i < lista.size(); i++) {
-
-            this.aviso(String.valueOf(lista.get(i).getDistance()));
-
-        }
-
+        //this.aviso(latitude+"");
+        //this.aviso(longitude+"");
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
 
-
         inicializaComponentes();
         // - Adiciconando marcador - exemplo
-        addMarkerMap(-18.921052, -48.257157);
+        //addMarkerMap(-18.921052, -48.257157);
 
     }
 
@@ -145,7 +118,8 @@ public class MapsActivity extends FragmentActivity implements View.OnClickListen
      */
     private void setUpMap() {
 
-        mMap.addMarker(new MarkerOptions().position(this.LtLg).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(this.LtLg).title("Onde estou"));
+        this.addMarkerMap(GPSHelper.TargetedPosto.latitude, GPSHelper.TargetedPosto.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(this.LtLg, 14.0f));
 
     }

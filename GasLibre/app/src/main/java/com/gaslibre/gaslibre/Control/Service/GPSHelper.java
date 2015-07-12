@@ -22,6 +22,7 @@ public class GPSHelper {
     private Location location;
     private double latitude;
     private double longitude;
+    public static LatLng TargetedPosto;
 
     public GPSHelper(Context context) {
         this.context = context;

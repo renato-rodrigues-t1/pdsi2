@@ -1,5 +1,6 @@
 package com.gaslibre.gaslibre;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +13,7 @@ import android.view.LayoutInflater;
 import android.content.Context;
 import android.view.View;
 import android.util.Log;
-
+import android.widget.AdapterView.OnItemClickListener;
 import com.gaslibre.gaslibre.Control.Posto.PostoController;
 import com.gaslibre.gaslibre.Control.Service.GPSHelper;
 import com.gaslibre.gaslibre.Model.Posto;
@@ -21,7 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Lista extends ActionBarActivity {
+public class Lista extends ActionBarActivity implements View.OnClickListener{
 
     private LatLng LtLg;
 
@@ -77,6 +78,10 @@ public class Lista extends ActionBarActivity {
         for(int i= 0; i< PostoController.listaOrdenadaPorPreco.size(); i++) {
 
             View item= (View) inflator.inflate(R.layout.item_lista_posto, null);
+
+            LatLng tmp= new LatLng(PostoController.listaOrdenadaPorPreco.get(i).getCoordenateX(), PostoController.listaOrdenadaPorPreco.get(i).getCoordenateY());
+            item.setTag(tmp);
+            item.setOnClickListener((View.OnClickListener) this);
 
             LinearLayout cadaElementoLista = (LinearLayout) findViewById(R.id.linearEachElement);
             LinearLayout colunaEsquerda = (LinearLayout) findViewById(R.id.colunaEsquerda);
@@ -153,6 +158,11 @@ public class Lista extends ActionBarActivity {
 
             View item= (View) inflator.inflate(R.layout.item_lista_posto, null);
 
+            LatLng tmp= new LatLng(PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateX(), PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateY());
+            item.setTag(tmp);
+            item.setOnClickListener((View.OnClickListener) this);
+            //item.setTag();
+
             LinearLayout cadaElementoLista = (LinearLayout) findViewById(R.id.linearEachElement);
             LinearLayout colunaEsquerda = (LinearLayout) findViewById(R.id.colunaEsquerda);
             TextView nomePosto = (TextView) item.findViewById(R.id.nomePosto);
@@ -177,8 +187,29 @@ public class Lista extends ActionBarActivity {
                     break;
             }
 
+            TextView coordenadaX = (TextView) item.findViewById(R.id.corrdenada_x);
+            coordenadaX.setText(PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateX()+"");
+
+            TextView coordenadaY = (TextView) item.findViewById(R.id.coordenada_y);
+            coordenadaY.setText(PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateY()+"");
+            //item.
+
             parentPanel.addView(item);
 
         }
+    }
+
+    public void onClick(View v) {
+        Log.v("shahsahshsPP//////",v.getTag()+"");
+        Log.v("shahsahshsPP//////",v.getTag()+"");
+        LatLng tmp= (LatLng) v.getTag();
+        //Log.v("shahsahshsPP//////", tmp.latitude()+" ".toString());
+        GPSHelper.TargetedPosto= tmp;
+        chamaMapa();
+    }
+
+    private void chamaMapa(){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 }

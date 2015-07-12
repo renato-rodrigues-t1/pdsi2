@@ -23,6 +23,11 @@ public class Lista extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_lista);
         initialiseComponents();
+
+        if(PostoController.prioridade.equals("preco"))
+            montaListaPorPreco();
+        else
+            montaListaPorDistancia();
     }
 
     @Override
@@ -47,6 +52,12 @@ public class Lista extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     private void initialiseComponents(){
+
+
+
+    }
+
+    private void montaListaPorPreco(){
         RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
         ScrollView scrollView= (ScrollView) findViewById(R.id.scrollView);
         //LinearLayout lista=  (LinearLayout)findViewById(R.id.linearElementsContainer);
@@ -55,21 +66,49 @@ public class Lista extends ActionBarActivity {
         LayoutInflater inflator = (LayoutInflater)this.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
-
-/*        for(String data : myList) {
-            // inflate child
-            View item = inflator.inflate(R.layout.list_item, null);
-            // initialize review UI
-            TextView dataText = (TextView) item.findViewById(R.id.data);
-            // set data
-            dataText.setText(data);
-            // add child
-            parentPanel.addView(item);
-        }*/
-        //setContentView(R.layout.item_lista_posto);
-
         for(int i= 0; i< PostoController.listaOrdenadaPorPreco.size(); i++) {
 
+            View item= (View) inflator.inflate(R.layout.item_lista_posto, null);
+
+            LinearLayout cadaElementoLista = (LinearLayout) findViewById(R.id.linearEachElement);
+            LinearLayout colunaEsquerda = (LinearLayout) findViewById(R.id.colunaEsquerda);
+            TextView nomePosto = (TextView) item.findViewById(R.id.nomePosto);
+            nomePosto.setText(PostoController.listaOrdenadaPorPreco.get(i).getName());
+            TextView endereco = (TextView) item.findViewById(R.id.endereco);
+            endereco.setText(PostoController.listaOrdenadaPorPreco.get(i).getEndereco());
+            TextView servico = (TextView) item.findViewById(R.id.servicoPosto);
+            servico.setText(PostoController.listaOrdenadaPorPreco.get(i).getServico());
+            LinearLayout colunaDireita = (LinearLayout) findViewById(R.id.colunaDireita);
+            TextView preco = (TextView) item.findViewById(R.id.preco);
+            switch(PostoController.combustivelPesquisado) {
+                case 1:
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getGasolina());
+                    break;
+
+                case 2:
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getEtanol());
+                    break;
+
+                case 3:
+                    preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getDiesel());
+                    break;
+            }
+
+            parentPanel.addView(item);
+
+        }
+    }
+
+    private void montaListaPorDistancia(){
+        RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
+        ScrollView scrollView= (ScrollView) findViewById(R.id.scrollView);
+        //LinearLayout lista=  (LinearLayout)findViewById(R.id.linearElementsContainer);
+        LinearLayout parentPanel = (LinearLayout) findViewById(R.id.linearElementsContainer);
+
+        LayoutInflater inflator = (LayoutInflater)this.getSystemService
+                (Context.LAYOUT_INFLATER_SERVICE);
+
+        for(int i= 0; i< PostoController.listaOrdenadaPorPreco.size(); i++) {
 
             View item= (View) inflator.inflate(R.layout.item_lista_posto, null);
 

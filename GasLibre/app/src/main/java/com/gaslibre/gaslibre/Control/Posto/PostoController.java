@@ -20,6 +20,7 @@ public class PostoController {
     public static int combustivelPesquisado;
     public static ArrayList<Posto> listaOrdenadaPorPreco= new ArrayList<Posto>();
     public static ArrayList<Posto> listaOrdenadaPorDistancia= new ArrayList<Posto>();
+    public static String prioridade= "preco";
 
     public PostoController(Context context) {
         this.context = context;

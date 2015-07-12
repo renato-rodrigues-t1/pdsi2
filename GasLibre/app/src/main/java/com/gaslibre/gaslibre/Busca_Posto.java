@@ -28,6 +28,7 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
     private Button buttonAlcool;
     private Button buttonDiesel;
     private Button buttonGasolina;
+    private Button buttonMaisProximo;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,12 @@ private void inicializaComponentes() {
         buttonAlcool= (Button) findViewById(R.id.botaoAlcool);
         buttonDiesel= (Button) findViewById(R.id.botaoDiesel);
         buttonGasolina= (Button) findViewById(R.id.botaoGasolina);
+        buttonMaisProximo= (Button) findViewById(R.id.botaoBuscaPorProximidade);
 
         buttonAlcool.setOnClickListener((View.OnClickListener)this);
         buttonDiesel.setOnClickListener((View.OnClickListener) this);
         buttonGasolina.setOnClickListener((View.OnClickListener) this);
+        buttonMaisProximo.setOnClickListener((View.OnClickListener) this);
 
         }
 
@@ -64,20 +67,24 @@ private void inicializaComponentes() {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.botaoGasolina:
-
-                chamaTelaPreco_Alcool();
-
+                PostoController.prioridade= "preco";
+                chamaTelaPreco_Gasolina();
         break;
 
         case R.id.botaoDiesel:
-        chamaTelaPreco_Diesel();
-
+            PostoController.prioridade= "preco";
+            chamaTelaPreco_Diesel();
         break;
 
-            case R.id.botaoAlcool:
-                chamaTelaPreco_Alcool();
+        case R.id.botaoAlcool:
+            PostoController.prioridade= "preco";
+            chamaTelaPreco_Alcool();
+        break;
 
-                break;
+        case R.id.botaoBuscaPorProximidade:
+            PostoController.prioridade= "distancia";
+            chamaTelaMaisProximo();
+            break;
     }
 }
 
@@ -104,6 +111,15 @@ private void inicializaComponentes() {
     private void chamaTelaPreco_Gasolina(){
         //Intent intent = new Intent(this, Ver_postos.class);
         PostoController.combustivel = 1;
+        GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 1);
+        a.execute();
+        //startActivity(intent);
+        //finish();
+    }
+
+    private void chamaTelaMaisProximo(){
+        //Intent intent = new Intent(this, Ver_postos.class);
+        //PostoController.combustivel = 1;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 1);
         a.execute();
         //startActivity(intent);

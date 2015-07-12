@@ -85,7 +85,7 @@ public class WebConnectorPosto {
             combustivelString = "die";
         }
 
-        String url = URLCommander.getInstance().getURLBuscaPosto(combustivelString);
+        String url = URLCommander.getInstance().getURLBuscaPosto()+combustivel;
         Log.v("URL-------->",url);
         ArrayList<Posto> postos = new ArrayList<Posto>();
 

@@ -64,11 +64,11 @@ public class URLCommander {
     }
 
     public String getURLLogin(String email, String senha){
-        return serverURL+"pdsi/cont/Requisicao/autentica?email="+email+"&senha="+senha;
+        return serverURL+"gaslibre/gaslibreweb/users/doLogin/"+email+"/"+senha;
     }
 
-    public String getURLBuscaPosto(String combustivel){
-        return serverURL+ "pdsi/cont/Requisicao/buscaPostoPorComb?comb="+combustivel;
+    public String getURLBuscaPosto(){
+        return serverURL+ "gaslibre/gaslibreweb/postos/getAllPostswithAFuel/";
     }
 
     public String getUrlBuscaServico(String servico){

@@ -74,7 +74,7 @@ public class WebConnectorUser {
                 Object[] array = { urlLogin, "GET" };
                 result = (new GetRESTFile()).connect(array);
             Log.v("result",result);
-                if(!result.equals("-1")){
+                if(!result.equals("-1") && !result.equals("")){
                     userReturn= new User();
 
                     /*JSONArray jsonArray = new JSONArray(result);

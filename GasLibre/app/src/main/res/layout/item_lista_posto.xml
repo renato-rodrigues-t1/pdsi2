@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearEachElement"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:divider="@android:color/holo_green_light"
+        android:dividerPadding="30dp"
+        android:elevation="3dp"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onClick"
+        android:showDividers="beginning|end"
+        android:textAlignment="center"
+        android:theme="@android:style/Theme.Panel"
+        android:touchscreenBlocksFocus="true"
+        android:background="#20ffffff">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/colunaEsquerda"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="22dip"
+                android:text="Nome do Posto ahhaha"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:id="@+id/nomePosto"
+                style="@style/Base.TextAppearance.AppCompat.Title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="endereco rua numero bairro"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:id="@+id/endereco" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="servico oferecido"
+                android:textSize="16dip"
+
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:id="@+id/servicoPosto" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical|right|top"
+            android:layout_weight="2.75"
+            android:id="@+id/colunaDireita">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="R$ 2,45"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:id="@+id/preco"
+                android:layout_gravity="left" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

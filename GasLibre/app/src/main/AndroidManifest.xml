@@ -60,7 +60,7 @@
         <activity
             android:name=".Busca_Posto"
             android:label="@string/title_activity_busca__posto"
-            android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+            >
         </activity>
         <activity
             android:name=".Lista"

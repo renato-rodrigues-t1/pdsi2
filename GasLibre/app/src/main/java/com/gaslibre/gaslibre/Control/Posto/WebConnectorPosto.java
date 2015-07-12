@@ -106,14 +106,14 @@ public class WebConnectorPosto {
                     posto.setId(Integer.parseInt(objectPosto.getString("Id")));
                     posto.setName(objectPosto.getString("name").toString());
                     posto.setBandeira(objectPosto.getString("bandeira").toString());
-                    posto.setGasolina((Float.parseFloat(objectPosto.getString("price_gas"))));
-                    posto.setEtanol(Float.parseFloat(objectPosto.getString("price_etanol")));
-                    posto.setDiesel(Float.parseFloat(objectPosto.getString("price_diesel")));
+                    posto.setGasolina((Double.parseDouble(objectPosto.getString("price_gas"))));
+                    posto.setEtanol(Double.parseDouble(objectPosto.getString("price_etanol")));
+                    posto.setDiesel(Double.parseDouble(objectPosto.getString("price_diesel")));
                     posto.setServico(objectPosto.getString("service").toString());
                     posto.setEndereco(objectPosto.getString("address").toString());
                     posto.setClassificacao(objectPosto.getString("posto_classification").toString());
-                    posto.setCoordenateX(Float.parseFloat(objectPosto.getString("coordinate_x")));
-                    posto.setCoordenateY(Float.parseFloat(objectPosto.getString("coordinate_y")));
+                    posto.setCoordenateX(Double.parseDouble(objectPosto.getString("coordinate_x")));
+                    posto.setCoordenateY(Double.parseDouble(objectPosto.getString("coordinate_y")));
 
                     postos.add(posto);
                 }

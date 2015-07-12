@@ -86,7 +86,7 @@ private void inicializaComponentes() {
         PostoController.combustivel = 2;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 2);
         a.execute();
-        chamaTelaLista();
+        //chamaTelaLista();
         //startActivity(intent);
         //finish();
     }
@@ -96,7 +96,7 @@ private void inicializaComponentes() {
         PostoController.combustivel = 3;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 3);
         a.execute();
-        chamaTelaLista();
+        //chamaTelaLista();
         //startActivity(intent);
         //finish();
     }
@@ -135,26 +135,29 @@ private void inicializaComponentes() {
 
         @Override
         protected ArrayList<Posto> doInBackground(Void... params) {
+            p.combustivelPesquisado= combustivel;
             ArrayList<Posto> retorno= p.buscaPostos(combustivel, 1, 2); //u.autenticaUsuarioServer(this.context, this.email, this.senha);
-
+            p.listaOrdenadaPorPreco= retorno;
             //Log.v("sasas", retorno.get(0).getEndereco());
             //Log.v("sasas", retorno.get(1).getEndereco());
 
             if(retorno!=null){
                 Log.v("Postos", "lista carregada");
+                chamaTelaLista();
 
             }else{
                 Log.v("Postos", "nulo");
                 //erroDeLogin();
             }
 
+            //progressBar2.dismiss();
+
             return retorno;
 
         }
 
         protected void onPostExecute(Posto posto) {
-            chamaTelaLista();
-            //progressBar2.dismiss();
+
         }
     }
 

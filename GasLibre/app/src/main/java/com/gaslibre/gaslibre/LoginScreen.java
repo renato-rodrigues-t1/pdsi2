@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 /**
  * Created by renato on 6/15/15.
  */
@@ -80,13 +79,14 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
                 String usuarioEntrado= editUser.getText().toString();
                 String senhaEntrada= editSenha.getText().toString();
-                GetUserAsyncTask getAsync= new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
-                getAsync.execute();
-                if(erro==false){
-                    Log.v("","");
-                    erroDeLogin();
+                if(usuarioEntrado.length()>0 && senhaEntrada.length()>0) {
+                    GetUserAsyncTask getAsync = new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
+                    getAsync.execute();
+                    if (erro == false) {
+                        Log.v("", "");
+                        erroDeLogin();
+                    }
                 }
-
                 break;
 
             case R.id.botaoRegistrar:
@@ -117,10 +117,10 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private void erroDeLogin(){
         Context context = getApplicationContext();
         CharSequence text = "Usuario ou senha invalidos, por favor verifique dados ouregistre-se";
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        //toast.show();
     }
     private void test(){
         User userTemp= new User("Bruno Ernandes", "renato.rsufu@gmail.com", "1234");
@@ -159,9 +159,9 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.abc_action_bar_home_description),
-                  //  getApplicationContext().getString(R.string.abc_action_bar_home_description_format));
-           // progressBar.hide();
+            //progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.title_activity_logando),
+              //      getApplicationContext().getString(R.string.corpo_texto__Login));
+            //progressBar.show();
         }
 
         @Override
@@ -183,13 +183,20 @@ public class LoginScreen extends Activity implements View.OnClickListener {
             u= UsersController.getInstance().getUserServer(userLocal);
             Log.v("Vindo do Server======", u.getName());
             return u;*/
+            /*try {
+                // thread to sleep for 1000 milliseconds
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                System.out.println(e);
+            }*/
+            //progressBar.dismiss();
             return retorno;
 
         }
 
         @Override
         protected void onPostExecute(User user) {
-            //progressBar.dismiss();
+
         }
     }
 

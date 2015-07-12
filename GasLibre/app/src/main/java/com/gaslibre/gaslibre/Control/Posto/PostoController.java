@@ -17,6 +17,9 @@ public class PostoController {
 
     private Context context;
     public static int combustivel;
+    public static int combustivelPesquisado;
+    public static ArrayList<Posto> listaOrdenadaPorPreco= new ArrayList<Posto>();
+    public static ArrayList<Posto> listaOrdenadaPorDistancia= new ArrayList<Posto>();
 
     public PostoController(Context context) {
         this.context = context;

@@ -7,20 +7,23 @@ public class Posto {
     private int id;
     private String name;
     private String bandeira;
-    private float gasolina;
-    private float etanol;
-    private float diesel;
+    private double gasolina;
+    private double etanol;
+    private double diesel;
     private String servico;
     private String endereco;
-    private float coordenateX;
-    private float coordenateY;
+    private double coordenateX;
+    private double coordenateY;
     private String classificacao;
+    private double distance;
 
     public Posto() {
     }
 
-    public Posto(int id, float gasolina, float etanol, float diesel, String servico, String endereco, float coordenateX, float coordenateY, String classificacao) {
+    public Posto(int id, String name, String bandeira, double gasolina, double etanol, double diesel, String servico, String endereco, double coordenateX, double coordenateY, String classificacao, double distance) {
         this.id = id;
+        this.name = name;
+        this.bandeira = bandeira;
         this.gasolina = gasolina;
         this.etanol = etanol;
         this.diesel = diesel;
@@ -29,6 +32,7 @@ public class Posto {
         this.coordenateX = coordenateX;
         this.coordenateY = coordenateY;
         this.classificacao = classificacao;
+        this.distance = distance;
     }
 
     public int getId() {
@@ -55,27 +59,27 @@ public class Posto {
         this.bandeira = bandeira;
     }
 
-    public float getGasolina() {
+    public double getGasolina() {
         return gasolina;
     }
 
-    public void setGasolina(float gasolina) {
+    public void setGasolina(double gasolina) {
         this.gasolina = gasolina;
     }
 
-    public float getEtanol() {
+    public double getEtanol() {
         return etanol;
     }
 
-    public void setEtanol(float etanol) {
+    public void setEtanol(double etanol) {
         this.etanol = etanol;
     }
 
-    public float getDiesel() {
+    public double getDiesel() {
         return diesel;
     }
 
-    public void setDiesel(float diesel) {
+    public void setDiesel(double diesel) {
         this.diesel = diesel;
     }
 
@@ -95,19 +99,19 @@ public class Posto {
         this.endereco = endereco;
     }
 
-    public float getCoordenateX() {
+    public double getCoordenateX() {
         return coordenateX;
     }
 
-    public void setCoordenateX(float coordenateX) {
+    public void setCoordenateX(double coordenateX) {
         this.coordenateX = coordenateX;
     }
 
-    public float getCoordenateY() {
+    public double getCoordenateY() {
         return coordenateY;
     }
 
-    public void setCoordenateY(float coordenateY) {
+    public void setCoordenateY(double coordenateY) {
         this.coordenateY = coordenateY;
     }
 
@@ -117,5 +121,13 @@ public class Posto {
 
     public void setClassificacao(String classificacao) {
         this.classificacao = classificacao;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

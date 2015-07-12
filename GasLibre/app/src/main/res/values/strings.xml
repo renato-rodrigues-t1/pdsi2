@@ -8,8 +8,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_ver_postos">ver_postos</string>
-    <string name="title_activity_listar__postos">Listar_Postos</string>
-    <string name="corpo_texto__postos">montando lista de postos</string>
+    <string name="title_activity_listar__postos">Caregando Dados</string>
+    <string name="title_activity_logando">Autenticando Usuario</string>
+    <string name="corpo_texto__postos">Montando lista de postos...</string>
+    <string name="corpo_texto__Login">por favor aguarde...</string>
     <string name="title_activity_menu__opcoes">Menu_Opcoes</string>
 
 </resources>

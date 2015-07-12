@@ -77,17 +77,10 @@ public class WebConnectorPosto {
         //notificacaoDao = new NotificacaoDAO(contexto);
         //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
         String combustivelString = "";
-        if (combustivel == 1) {
-            combustivelString = "gas";
-        } else if (combustivel == 2) {
-            combustivelString = "alc";
-        } else if (combustivel == 3) {
-            combustivelString = "die";
-        }
 
         String url = URLCommander.getInstance().getURLBuscaPosto()+combustivel;
         Log.v("URL-------->",url);
-        ArrayList<Posto> postos = new ArrayList<Posto>();
+        ArrayList<Posto> postos = null;
 
         try {
             Object[] array = {url, "GET"};
@@ -100,6 +93,8 @@ public class WebConnectorPosto {
                     return postos;
                 }
 
+                postos= new ArrayList<Posto>();
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     Posto posto = new Posto();
                     JSONObject objJson = new JSONObject(jsonArray.getString(i));
@@ -108,15 +103,17 @@ public class WebConnectorPosto {
                     JSONObject objectPosto = objJson.getJSONObject("Posto");
 
                     // Recebendo Dados
-                    posto.setClassificacao(objectPosto.getString("classificacao").toString());
-                    posto.setCoordenateX(Integer.parseInt(objectPosto.getString("coordenadaX")));
-                    posto.setCoordenateY(Integer.parseInt(objJson.getString("coordenadaY")));
-                    posto.setDiesel(Integer.parseInt(objectPosto.getString("diesel")));
-                    posto.setGasolina((Integer.parseInt(objectPosto.getString("gasolina"))));
-                    posto.setEtanol(Integer.parseInt(objectPosto.getString("etanol")));
-                    posto.setEndereco(objectPosto.getString("endereco").toString());
-                    posto.setId(Integer.parseInt(objectPosto.getString("id")));
-                    posto.setServico(objectPosto.getString("servico").toString());
+                    posto.setId(Integer.parseInt(objectPosto.getString("Id")));
+                    posto.setName(objectPosto.getString("name").toString());
+                    posto.setBandeira(objectPosto.getString("bandeira").toString());
+                    posto.setGasolina((Float.parseFloat(objectPosto.getString("price_gas"))));
+                    posto.setEtanol(Float.parseFloat(objectPosto.getString("price_etanol")));
+                    posto.setDiesel(Float.parseFloat(objectPosto.getString("price_diesel")));
+                    posto.setServico(objectPosto.getString("service").toString());
+                    posto.setEndereco(objectPosto.getString("address").toString());
+                    posto.setClassificacao(objectPosto.getString("posto_classification").toString());
+                    posto.setCoordenateX(Float.parseFloat(objectPosto.getString("coordinate_x")));
+                    posto.setCoordenateY(Float.parseFloat(objectPosto.getString("coordinate_y")));
 
                     postos.add(posto);
                 }

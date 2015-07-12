@@ -112,13 +112,13 @@ private void inicializaComponentes() {
     }
 
     private void chamaTelaLista(){
-        Intent intent = new Intent(this, lista.class);
+        Intent intent = new Intent(this, Lista.class);
         startActivity(intent);
         finish();
     }
     private class GetUserAsyncTaskPosto extends AsyncTask<Void, Void, ArrayList<Posto>> {
 
-        ProgressDialog progressBar;
+        ProgressDialog progressBar2;
         Context context;
         int combustivel;
 
@@ -130,14 +130,15 @@ private void inicializaComponentes() {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar = ProgressDialog.show(Busca_Posto.this, getApplicationContext().getString(R.string.abc_action_bar_home_description),
-                    "montando lista de resultados");
-            progressBar.show();
+            //progressBar2 = ProgressDialog.show(Busca_Posto.this, getApplicationContext().getString(R.string.title_activity_listar__postos), getApplicationContext().getString(R.string.corpo_texto__postos));
+            //progressBar2.show();
         }
 
         @Override
         protected ArrayList<Posto> doInBackground(Void... params) {
             ArrayList<Posto> retorno= p.buscaPostos(combustivel, 1, 2); //u.autenticaUsuarioServer(this.context, this.email, this.senha);
+
+            //Log.v("sasas", retorno.get(0).getEndereco());
 
             if(retorno!=null){
                 Log.v("login", "deu certo");
@@ -152,7 +153,7 @@ private void inicializaComponentes() {
         }
 
         protected void onPostExecute(Posto posto) {
-            progressBar.dismiss();
+            //progressBar2.dismiss();
         }
     }
 

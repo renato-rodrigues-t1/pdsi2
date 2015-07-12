@@ -61,10 +61,10 @@
             android:name=".Busca_Posto"
             android:label="@string/title_activity_busca__posto" >
         </activity>
-        <!--<activity
-            android:name=".lista"
-            android:label="@string/title_activity_lista" >
-        </activity>-->
+        <activity
+            android:name=".Lista"
+            >
+        </activity>
         <activity
             android:name=".Listar_Postos"
             android:label="@string/title_activity_listar__postos" >

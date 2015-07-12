@@ -82,7 +82,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
                 String senhaEntrada= editSenha.getText().toString();
                 GetUserAsyncTask getAsync= new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
                 getAsync.execute();
-                if(erro!=false){
+                if(erro==false){
                     Log.v("","");
                     erroDeLogin();
                 }
@@ -159,9 +159,9 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.abc_action_bar_home_description),
-                    getApplicationContext().getString(R.string.abc_action_bar_home_description_format));
-            progressBar.hide();
+            //progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.abc_action_bar_home_description),
+                  //  getApplicationContext().getString(R.string.abc_action_bar_home_description_format));
+           // progressBar.hide();
         }
 
         @Override
@@ -189,7 +189,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(User user) {
-            progressBar.dismiss();
+            //progressBar.dismiss();
         }
     }
 

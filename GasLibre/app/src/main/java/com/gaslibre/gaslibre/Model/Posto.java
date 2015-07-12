@@ -5,6 +5,8 @@ package com.gaslibre.gaslibre.Model;
  */
 public class Posto {
     private int id;
+    private String name;
+    private String bandeira;
     private float gasolina;
     private float etanol;
     private float diesel;
@@ -35,6 +37,22 @@ public class Posto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
     }
 
     public float getGasolina() {

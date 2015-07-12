@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 
 public class Lista extends ActionBarActivity {
@@ -11,7 +12,9 @@ public class Lista extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_lista);
+        initialiseComponents();
     }
 
 
@@ -35,5 +38,9 @@ public class Lista extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void initialiseComponents(){
+        LinearLayout elementoLista=  (LinearLayout)findViewById(R.id.layoutElementoLista);
+
     }
 }

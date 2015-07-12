@@ -31,7 +31,7 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
 
 
     protected void onCreate(Bundle savedInstanceState) {
-
+        //getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca_posto);
         DBManager dbManager= new DBManager(this);//inicializa as tabelas se naum existem.
@@ -106,7 +106,6 @@ private void inicializaComponentes() {
         PostoController.combustivel = 1;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 1);
         a.execute();
-        chamaTelaLista();
         //startActivity(intent);
         //finish();
     }
@@ -114,7 +113,7 @@ private void inicializaComponentes() {
     private void chamaTelaLista(){
         Intent intent = new Intent(this, Lista.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
     private class GetUserAsyncTaskPosto extends AsyncTask<Void, Void, ArrayList<Posto>> {
 
@@ -139,12 +138,13 @@ private void inicializaComponentes() {
             ArrayList<Posto> retorno= p.buscaPostos(combustivel, 1, 2); //u.autenticaUsuarioServer(this.context, this.email, this.senha);
 
             //Log.v("sasas", retorno.get(0).getEndereco());
+            //Log.v("sasas", retorno.get(1).getEndereco());
 
             if(retorno!=null){
-                Log.v("login", "deu certo");
+                Log.v("Postos", "lista carregada");
 
             }else{
-                Log.v("login", "nulo");
+                Log.v("Postos", "nulo");
                 //erroDeLogin();
             }
 
@@ -153,6 +153,7 @@ private void inicializaComponentes() {
         }
 
         protected void onPostExecute(Posto posto) {
+            chamaTelaLista();
             //progressBar2.dismiss();
         }
     }

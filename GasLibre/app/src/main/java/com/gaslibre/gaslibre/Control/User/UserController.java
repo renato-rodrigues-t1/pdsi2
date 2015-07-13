@@ -34,8 +34,11 @@ public class UserController {
 
     public User autenticaUsuarioServer(Context context, String email, String senha){
         WebConnectorUser.context= context;
-        return WebConnectorUser.getInstance(context).getUserServer(email, senha);
-
+        User userTemp= WebConnectorUser.getInstance(context).getUserServer(email, senha);
+        if(userTemp!=null){
+            this.colocaUsuarioNaSessao(userTemp);
+        }
+        return userTemp;
     }
 
     public boolean registraUsuario(User userTemp){
@@ -52,9 +55,11 @@ public class UserController {
         }
     }
 
-
-
     public void colocaUsuarioNaSessao(User user){
         userNaSessao= user;
+    }
+
+    public void retiraUsuarioDaSessao(){
+        userNaSessao= null;
     }
 }

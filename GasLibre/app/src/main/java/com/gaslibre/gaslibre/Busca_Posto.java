@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import java.util.ArrayList;
 
 
@@ -29,6 +31,7 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
     private Button buttonDiesel;
     private Button buttonGasolina;
     private Button buttonMaisProximo;
+    private ImageButton logoff;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +58,13 @@ private void inicializaComponentes() {
         buttonDiesel= (Button) findViewById(R.id.botaoDiesel);
         buttonGasolina= (Button) findViewById(R.id.botaoGasolina);
         buttonMaisProximo= (Button) findViewById(R.id.botaoBuscaPorProximidade);
+        logoff= (ImageButton) findViewById(R.id.logoff);
 
         buttonAlcool.setOnClickListener((View.OnClickListener)this);
         buttonDiesel.setOnClickListener((View.OnClickListener) this);
         buttonGasolina.setOnClickListener((View.OnClickListener) this);
         buttonMaisProximo.setOnClickListener((View.OnClickListener) this);
+        logoff.setOnClickListener((View.OnClickListener) this);
 
         }
 
@@ -84,6 +89,12 @@ private void inicializaComponentes() {
         case R.id.botaoBuscaPorProximidade:
             PostoController.prioridade= "distancia";
             chamaTelaMaisProximo();
+            break;
+
+        case R.id.logoff:
+            UserController u= new UserController();
+            u.retiraUsuarioDaSessao();
+            chamaTelaLogin();
             break;
     }
 }
@@ -130,6 +141,12 @@ private void inicializaComponentes() {
         Intent intent = new Intent(this, Lista.class);
         startActivity(intent);
         //finish();
+    }
+
+    private void chamaTelaLogin(){
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
+        finish();
     }
     private class GetUserAsyncTaskPosto extends AsyncTask<Void, Void, ArrayList<Posto>> {
 

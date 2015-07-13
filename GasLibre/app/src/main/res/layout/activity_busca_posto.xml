@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundodetela"
     android:weightSum="1"
     android:id="@+id/buscar_postoScreen"
-    android:baselineAligned="true">
-
-    >
-
+    android:baselineAligned="true"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="busca de postos"
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_gravity="center_horizontal"
         android:textColor="@android:color/white"
-        android:fontFamily="@string/action_sign_in_short" />
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/logoff" />
+
+    <ImageButton
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:id="@+id/logoff"
+        android:layout_gravity="right|top"
+        android:background="@drawable/logoff"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,6 +45,17 @@
         android:layout_marginTop="300dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="ordenar por"
+            android:id="@+id/textView"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="match_parent"
@@ -69,4 +95,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

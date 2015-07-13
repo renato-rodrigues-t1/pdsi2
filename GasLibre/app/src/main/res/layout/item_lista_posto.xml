@@ -71,7 +71,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center_vertical|right|top"
-            android:layout_weight="2.75"
+            android:layout_weight="2"
             android:id="@+id/colunaDireita">
 
             <TextView
@@ -82,23 +82,15 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:id="@+id/preco"
-                android:layout_gravity="left" />
+                android:layout_gravity="left|top" />
 
-            <TextView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="coordenada_x"
-                android:id="@+id/corrdenada_x"
-                android:visibility="invisible" />
+                android:id="@+id/imageButton"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@android:drawable/ic_dialog_map" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="coordenada_y"
-                android:id="@+id/coordenada_y"
-                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>

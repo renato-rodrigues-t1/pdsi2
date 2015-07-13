@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.widget.AdapterView.OnItemClickListener;
 import com.gaslibre.gaslibre.Control.Posto.PostoController;
 import com.gaslibre.gaslibre.Control.Service.GPSHelper;
+import com.gaslibre.gaslibre.Control.User.UserController;
 import com.gaslibre.gaslibre.Model.Posto;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -25,7 +27,7 @@ import java.util.Comparator;
 public class Lista extends ActionBarActivity implements View.OnClickListener{
 
     private LatLng LtLg;
-
+    private ImageButton logoff;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +63,8 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
         return super.onOptionsItemSelected(item);
     }
     private void initialiseComponents(){
-
-
+        logoff= (ImageButton) findViewById(R.id.logoff);
+        logoff.setOnClickListener((View.OnClickListener) this);
 
     }
 
@@ -187,27 +189,31 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
                     break;
             }
 
-            TextView coordenadaX = (TextView) item.findViewById(R.id.corrdenada_x);
-            coordenadaX.setText(PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateX()+"");
-
-            TextView coordenadaY = (TextView) item.findViewById(R.id.coordenada_y);
-            coordenadaY.setText(PostoController.listaOrdenadaPorDistancia.get(i).getCoordenateY()+"");
-            //item.
-
             parentPanel.addView(item);
 
         }
     }
 
     public void onClick(View v) {
-        Log.v("shahsahshsPP//////",v.getTag()+"");
-        Log.v("shahsahshsPP//////",v.getTag()+"");
-        LatLng tmp= (LatLng) v.getTag();
-        //Log.v("shahsahshsPP//////", tmp.latitude()+" ".toString());
-        GPSHelper.TargetedPosto= tmp;
-        chamaMapa();
+        if(v.getId()==R.id.logoff){
+            UserController u= new UserController();
+            u.retiraUsuarioDaSessao();
+            chamaTelaLogin();
+        }else {
+            Log.v("shahsahshsPP//////", v.getTag() + "");
+            Log.v("shahsahshsPP//////", v.getTag() + "");
+            LatLng tmp = (LatLng) v.getTag();
+            //Log.v("shahsahshsPP//////", tmp.latitude()+" ".toString());
+            GPSHelper.TargetedPosto = tmp;
+            chamaMapa();
+        }
     }
 
+    private void chamaTelaLogin(){
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
+        finish();
+    }
     private void chamaMapa(){
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);

@@ -3,11 +3,14 @@ package com.gaslibre.gaslibre;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.app.AlertDialog;
+import
+        android.content.DialogInterface;
 import com.gaslibre.gaslibre.Control.User.UserController;
 import com.gaslibre.gaslibre.Model.User;
 
@@ -17,13 +20,9 @@ import com.gaslibre.gaslibre.Model.User;
 public class RegistroScreen extends Activity implements View.OnClickListener{
 
     UserController u= new UserController(this);
-    private TextView textoNome;
-    private TextView textoUsuauio;
-    private TextView textoSenha;
     private EditText editNome;
     private EditText editUser;
     private EditText editSenha;
-    private Button buttonLogin;
     private Button buttonRegistrar;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +36,56 @@ public class RegistroScreen extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.botaoRegistrar:
-                User temp= new User(editNome.getText().toString(), editUser.getText().toString(), editSenha.getText().toString());
-                u.registraUsuario(temp);
+                if(editUser.getText().toString().indexOf("@") > 0) {
 
-                chamaTelaDeLogin();
-
+                    User temp = new User(editNome.getText().toString(), editUser.getText().toString(), editSenha.getText().toString());
+                    if (u.registraUsuarioServer(temp, this)) {
+                        chamaTelaDeLogin();
+                    } else {
+                        //falha de registro
+                        exibeErroRegistro();
+                    }
+                }else{
+                    exibeErroArrouba();
+                }
                 break;
         }
     }
+
+    private void exibeErroRegistro(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Ops, nao consegui realizar seu registro :/");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void exibeErroArrouba(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Ops, seu email nem contem o caracter '@' rsrs");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
     private void inicializaComponentes() {
 
-        textoUsuauio= (TextView)findViewById(R.id.textoUsuario);
-        textoSenha= (TextView)findViewById(R.id.textSenha);
-        textoNome= (TextView)findViewById(R.id.textNome);
-        editUser= (EditText) findViewById(R.id.editUsuario);
-        editSenha= (EditText) findViewById(R.id.editSenha);
-        editNome= (EditText) findViewById(R.id.editNome);
-        buttonLogin= (Button) findViewById(R.id.botaoLogin);
+        editUser= (EditText)findViewById(R.id.email);
+        editSenha= (EditText)findViewById(R.id.editSenha);
+        editNome= (EditText)findViewById(R.id.name);
+
         buttonRegistrar= (Button) findViewById(R.id.botaoRegistrar);
 
         buttonRegistrar.setOnClickListener((View.OnClickListener)this);

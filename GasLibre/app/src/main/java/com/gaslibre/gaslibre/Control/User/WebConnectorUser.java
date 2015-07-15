@@ -103,8 +103,30 @@ public class WebConnectorUser {
             }
             return userReturn;
         }
-    }
 
+
+    public boolean registraUserServer(User user){
+
+        String urlLogin= URLCommander.getInstance().getURLRegistraUser(user);
+        String result = "";
+        User userReturn= null;
+
+        Log.v("URLcUSER>>>>>>>",urlLogin);
+
+        try {
+            Object[] array = { urlLogin, "GET" };
+            result = (new GetRESTFile()).connect(array);
+            Log.v("result",result);
+            if(!result.equals("-1") && !result.equals("")){
+              return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+}
 /*
 public class WebConnectorNotificacao {
 

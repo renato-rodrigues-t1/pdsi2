@@ -53,8 +53,7 @@
         <activity
             android:name=".RegistroScreen"
             android:screenOrientation="portrait"
-            android:label="registro"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:label="registro">
         </activity>
         <activity
             android:name=".Busca_Posto"

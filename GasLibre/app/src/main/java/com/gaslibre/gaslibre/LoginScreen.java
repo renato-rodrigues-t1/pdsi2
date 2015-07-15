@@ -1,7 +1,9 @@
 package com.gaslibre.gaslibre;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,8 +66,8 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private void inicializaComponentes() {
         //teste commit Osvaldo
 
-        textoUsuauio= (TextView)findViewById(R.id.textoUsuario);
-        textoSenha= (TextView)findViewById(R.id.textSenha);
+        //textoUsuauio= (TextView)findViewById(R.id.textoUsuario);
+        //textoSenha= (TextView)findViewById(R.id.textSenha);
         editUser= (EditText) findViewById(R.id.editUsuario);
         editSenha= (EditText) findViewById(R.id.editSenha);
         buttonLogin= (Button) findViewById(R.id.botaoLogin);
@@ -152,6 +154,15 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         int idUsuario;
         Context context;
         String email, senha;
+        AlertDialog alert11;
+        private void exibeErroArrouba(){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginScreen.this);
+            builder1.setTitle("Autenticando seus  dados");
+            builder1.setMessage("aguarde, por favor...");
+            builder1.setCancelable(true);
+            alert11 = builder1.create();
+            alert11.show();
+        }
 
         private GetUserAsyncTask(Context context, String email, String senha) {
             this.context = context;
@@ -169,6 +180,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
             //progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.title_activity_logando),
               //      getApplicationContext().getString(R.string.corpo_texto__Login));
             //progressBar.show();
+
         }
 
         @Override
@@ -203,7 +215,16 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(User user) {
-
+            try {
+                synchronized (this) {
+                    wait(2000);
+                    //alert11.cancel();
+                }
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                //Log.d(TAG, "Waiting didnt work!!");
+                e.printStackTrace();
+            }
         }
     }
 

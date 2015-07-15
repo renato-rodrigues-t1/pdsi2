@@ -26,8 +26,8 @@ public class UserController {
 
     public boolean autenticaUsuario( String email, String senha ){
         User retorno= userDao.AutenticaUsuario(email, senha);
-           if(retorno==null)
-                return false;
+        if(retorno==null)
+            return false;
         Log.v("USERBANCO;;;;;;;;",retorno.getId()+ "- "+ retorno.getName());
         return true;
     }
@@ -44,6 +44,12 @@ public class UserController {
     public boolean registraUsuario(User userTemp){
         long a= userDao.registraUsuario(userTemp);
 
+        return false;
+    }
+
+    public boolean registraUsuarioServer(User user, Context context){
+        if(WebConnectorUser.getInstance(context).registraUserServer(user))
+            return true;
         return false;
     }
 

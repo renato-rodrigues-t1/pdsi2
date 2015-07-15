@@ -3,6 +3,8 @@ package com.gaslibre.gaslibre.Control.Service;
 /**
  * Created by renato on 5/23/15.
  */
+
+import com.gaslibre.gaslibre.Model.User;
 public class URLCommander {
     //returns right URL to conect the server depending on the the needed task
 
@@ -73,5 +75,9 @@ public class URLCommander {
 
     public String getUrlBuscaServico(String servico){
         return serverURL+"pdsi/cont/Requisicao/buscaPostoPorComb?comb=";
+    }
+
+    public String getURLRegistraUser(User u){
+        return serverURL+"gaslibre/gaslibreweb/users/"+u.getName()+"/"+u.getEmail()+"/"+u.getSenha();
     }
 }

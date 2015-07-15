@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editSenha"
+            android:inputType="textPassword"
             android:gravity="center_horizontal"
             android:hint="senha"
             android:textColor="@android:color/white"

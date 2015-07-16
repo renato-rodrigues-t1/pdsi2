@@ -29,8 +29,6 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private UserDAO userDAO= new UserDAO(this);
     private UserController u;
 
-    private TextView textoUsuauio;
-    private TextView textoSenha;
     private EditText editUser;
     private EditText editSenha;
     private Button buttonLogin;
@@ -57,10 +55,25 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         //String senha=
         //userController.autenticaUsuario(email, senha);
 
-       //if s=falso chama tela de registro
+        //if s=falso chama tela de registro
 
         //se naum, direciona p tela de mapa
 
+    }
+
+    private void exibeErroLogin(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Falha de Login");
+        builder1.setMessage("verifique se seu email e senhas estao corretos");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void inicializaComponentes() {
@@ -85,24 +98,38 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.botaoLogin:
-
                 String usuarioEntrado= editUser.getText().toString();
                 String senhaEntrada= editSenha.getText().toString();
-                if(usuarioEntrado.length()>0 && senhaEntrada.length()>0) {
-                    GetUserAsyncTask getAsync = new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
-                    getAsync.execute();
-                    if (erro == false) {
-                        Log.v("", "");
-                        erroDeLogin();
+
+                    if (usuarioEntrado.length() > 0 && senhaEntrada.length() > 0) {
+                        if(usuarioEntrado.indexOf("@")>0) {
+                            GetUserAsyncTask getAsync = new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
+                            getAsync.execute();
+                        }else{
+                            exibeErroArrouba();;
+                        }
                     }
-                }
                 break;
 
             case R.id.botaoRegistrar:
-                    chamaTelaRegistro();
+                chamaTelaRegistro();
 
                 break;
         }
+    }
+
+    private void exibeErroArrouba(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Ops, seu email nem contem o caracter '@' rsrs");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void chamaTelaMapa(){
@@ -123,17 +150,9 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         finish();
     }
 
-    private void erroDeLogin(){
-        Context context = getApplicationContext();
-        CharSequence text = "Usuario ou senha invalidos, por favor verifique dados ouregistre-se";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        //toast.show();
-    }
     private void test(){
         User userTemp= new User("Bruno Ernandes", "renato.rsufu@gmail.com", "1234");
-        Log.v("USER>>>", userTemp.getName()+"- "+userTemp.getEmail()+"- "+userTemp.getSenha());
+        Log.v("USER>>>", userTemp.getName() + "- " + userTemp.getEmail() + "- " + userTemp.getSenha());
 
         //userDAO.registraUsuario(userTemp);
         //User newUser= userDAO.AutenticaUsuario(userTemp.getEmail(), userTemp.getSenha());
@@ -155,10 +174,11 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         Context context;
         String email, senha;
         AlertDialog alert11;
-        private void exibeErroArrouba(){
+
+        private void dialogCarregando(){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginScreen.this);
             builder1.setTitle("Autenticando seus  dados");
-            builder1.setMessage("aguarde, por favor...");
+            builder1.setMessage("por favor, aguarde...");
             builder1.setCancelable(true);
             alert11 = builder1.create();
             alert11.show();
@@ -177,8 +197,9 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            dialogCarregando();
             //progressBar = ProgressDialog.show(LoginScreen.this, getApplicationContext().getString(R.string.title_activity_logando),
-              //      getApplicationContext().getString(R.string.corpo_texto__Login));
+            //      getApplicationContext().getString(R.string.corpo_texto__Login));
             //progressBar.show();
 
         }
@@ -217,8 +238,11 @@ public class LoginScreen extends Activity implements View.OnClickListener {
         protected void onPostExecute(User user) {
             try {
                 synchronized (this) {
-                    wait(2000);
-                    //alert11.cancel();
+                    wait(1700);
+                    alert11.cancel();
+                    if(erro){
+                        exibeErroLogin();
+                    }
                 }
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block

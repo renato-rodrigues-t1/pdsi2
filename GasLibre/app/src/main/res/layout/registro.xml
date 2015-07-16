@@ -23,8 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom|end"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="300dp"
         android:layout_marginRight="20dp"
+        android:layout_gravity="bottom"
         android:layout_marginLeft="20dp">
 
         <EditText
@@ -69,6 +70,15 @@
             android:id="@+id/botaoRegistrar"
             android:textColor="@android:color/white"
             android:background="#ff869800" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="cancelar"
+            android:id="@+id/button"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_red_light"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 

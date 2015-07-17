@@ -28,6 +28,7 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
 
     private LatLng LtLg;
     private ImageButton logoff;
+    private TextView combustivelTexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
     private void initialiseComponents(){
         logoff= (ImageButton) findViewById(R.id.logoff);
         logoff.setOnClickListener((View.OnClickListener) this);
-        TextView combustivel= (TextView) findViewById(R.id.combustivelLabel);
+        combustivelTexto= (TextView) findViewById(R.id.combustivelLabel);
 
     }
 
@@ -101,15 +102,17 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
             switch(PostoController.combustivelPesquisado) {
                 case 1:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getGasolina());
-                    
+                    combustivelTexto.setText("gasolina");
                     break;
 
                 case 2:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getEtanol());
+                    combustivelTexto.setText("etanol");
                     break;
 
                 case 3:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getDiesel());
+                    combustivelTexto.setText("diesel");
                     break;
             }
 
@@ -182,14 +185,17 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
             switch(PostoController.combustivelPesquisado) {
                 case 1:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getGasolina());
+                    combustivelTexto.setText("gasolina");
                     break;
 
                 case 2:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getEtanol());
+                    combustivelTexto.setText("etanol");
                     break;
 
                 case 3:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorDistancia.get(i).getDiesel());
+                    combustivelTexto.setText("diesel");
                     break;
             }
 

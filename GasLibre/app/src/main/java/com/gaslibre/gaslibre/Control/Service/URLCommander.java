@@ -37,8 +37,8 @@ public class URLCommander {
         return serverURL+"gaslibre/gaslibreweb/users/doLogin/"+email+"/"+senha;
     }
 
-    public String getURLBuscaPosto(){
-        return serverURL+ "gaslibre/gaslibreweb/postos/getAllPostswithAFuel/";
+    public String getURLBuscaPosto(int combustivel, String servico){
+        return serverURL+ "gaslibre/gaslibreweb/postos/getAllPostswithAFuel/"+combustivel+"/"+servico;
     }
 
     public String getUrlBuscaServico(String servico){

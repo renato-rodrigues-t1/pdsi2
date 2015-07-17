@@ -78,7 +78,7 @@ public class WebConnectorPosto {
         //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
         String combustivelString = "";
 
-        String url = URLCommander.getInstance().getURLBuscaPosto()+combustivel;
+        String url = URLCommander.getInstance().getURLBuscaPosto(combustivel,PostoController.servico);
         Log.v("URL-------->",url);
         ArrayList<Posto> postos = null;
 

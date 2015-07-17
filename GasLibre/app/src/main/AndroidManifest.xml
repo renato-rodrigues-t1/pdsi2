@@ -77,5 +77,9 @@
             android:name=".Menu_Opcoes"
             android:label="@string/title_activity_menu__opcoes" >
         </activity>
+        <activity
+            android:name=".Menu_avancados"
+            android:label="avancado" >
+        </activity>
     </application>
 </manifest>

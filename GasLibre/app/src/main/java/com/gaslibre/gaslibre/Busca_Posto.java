@@ -9,8 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ import com.gaslibre.gaslibre.Control.User.UserController;
 import com.gaslibre.gaslibre.DAO.DBManager;
 import com.gaslibre.gaslibre.DAO.UserDAO;
 import com.gaslibre.gaslibre.Model.Posto;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * Created by osvaldo on 02/07/2015.
@@ -34,6 +37,9 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
     private Button buttonGasolina;
     private Button buttonMaisProximo;
     private ImageButton logoff;
+    private String[] arraySpinner;
+    private Spinner s;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         //getSupportActionBar().hide();
@@ -42,6 +48,8 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
         DBManager dbManager= new DBManager(this);//inicializa as tabelas se naum existem.
 
         inicializaComponentes();
+
+
         //test();
         //String email= textfild.getString
         //String senha=
@@ -70,12 +78,19 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
 
 private void inicializaComponentes() {
 
-
         buttonAlcool= (Button) findViewById(R.id.botaoAlcool);
         buttonDiesel= (Button) findViewById(R.id.botaoDiesel);
         buttonGasolina= (Button) findViewById(R.id.botaoGasolina);
         buttonMaisProximo= (Button) findViewById(R.id.botaoBuscaPorProximidade);
         logoff= (ImageButton) findViewById(R.id.logoff);
+
+        this.arraySpinner = new String[] {
+                "selecione", "Loja de Conveniência", "Coompreensor", "Troca de oleo", "borracharia"
+        };
+        s = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        s.setAdapter(adapter);
 
         buttonAlcool.setOnClickListener((View.OnClickListener)this);
         buttonDiesel.setOnClickListener((View.OnClickListener) this);
@@ -83,7 +98,21 @@ private void inicializaComponentes() {
         buttonMaisProximo.setOnClickListener((View.OnClickListener) this);
         logoff.setOnClickListener((View.OnClickListener) this);
 
+
+    s.setOnItemSelectedListener(new OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(<?> parentView, View selectedItemView, int position, long id) {
+            // your code here
         }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parentView) {
+            // your code here
+        }
+
+    });
+
+}
 
 
     public void onClick(View v) {
@@ -113,13 +142,26 @@ private void inicializaComponentes() {
             u.retiraUsuarioDaSessao();
             chamaTelaLogin();
             break;
+
+        case R.id.spinner:
+            PostoController.servico= s.getSelectedItem().toString();
+        break;
     }
 }
+
+    private void defineFiltroServico(){
+        String text = s.getSelectedItem().toString();
+        Log.v("Spinner",s.getSelectedItem().toString());
+        if(!text.equals("selecione")){
+            PostoController.servico= text;
+        }
+    }
 
     private void chamaTelaPreco_Alcool(){
         //Intent intent = new Intent(this, Ver_postos.class);
         PostoController.combustivel = 2;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 2);
+        defineFiltroServico();
         a.execute();
         //chamaTelaLista();
         //startActivity(intent);
@@ -130,6 +172,7 @@ private void inicializaComponentes() {
         //Intent intent = new Intent(this, Ver_postos.class);
         PostoController.combustivel = 3;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 3);
+        defineFiltroServico();
         a.execute();
         //chamaTelaLista();
         //startActivity(intent);
@@ -140,6 +183,7 @@ private void inicializaComponentes() {
         //Intent intent = new Intent(this, Ver_postos.class);
         PostoController.combustivel = 1;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 1);
+        defineFiltroServico();
         a.execute();
         //startActivity(intent);
         //finish();
@@ -149,6 +193,7 @@ private void inicializaComponentes() {
         //Intent intent = new Intent(this, Ver_postos.class);
         //PostoController.combustivel = 1;
         GetUserAsyncTaskPosto a= new GetUserAsyncTaskPosto(this, 1);
+        defineFiltroServico();
         a.execute();
         //startActivity(intent);
         //finish();

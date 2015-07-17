@@ -176,7 +176,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
         private void dialogCarregando(){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginScreen.this);
-            builder1.setTitle("Autenticando seus  dados");
+            builder1.setTitle("Autenticando seus dados");
             builder1.setMessage("por favor, aguarde...");
             builder1.setCancelable(true);
             alert11 = builder1.create();

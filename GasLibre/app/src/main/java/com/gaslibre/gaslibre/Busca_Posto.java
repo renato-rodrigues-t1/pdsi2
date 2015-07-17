@@ -76,7 +76,7 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
         alert11.show();
     }
 
-private void inicializaComponentes() {
+    private void inicializaComponentes() {
 
         buttonAlcool= (Button) findViewById(R.id.botaoAlcool);
         buttonDiesel= (Button) findViewById(R.id.botaoDiesel);
@@ -85,7 +85,7 @@ private void inicializaComponentes() {
         logoff= (ImageButton) findViewById(R.id.logoff);
 
         this.arraySpinner = new String[] {
-                "selecione", "Loja de Conveniência", "Coompreensor", "Troca de oleo", "borracharia"
+                "selecione", "Lava Jato", "Calibragem de Pneus", "Troca de oleo", "loja de conveniencia", "borracharia"
         };
         s = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -99,20 +99,7 @@ private void inicializaComponentes() {
         logoff.setOnClickListener((View.OnClickListener) this);
 
 
-    s.setOnItemSelectedListener(new OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(<?> parentView, View selectedItemView, int position, long id) {
-            // your code here
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parentView) {
-            // your code here
-        }
-
-    });
-
-}
+    }
 
 
     public void onClick(View v) {
@@ -120,41 +107,41 @@ private void inicializaComponentes() {
             case R.id.botaoGasolina:
                 PostoController.prioridade= "preco";
                 chamaTelaPreco_Gasolina();
-        break;
+                break;
 
-        case R.id.botaoDiesel:
-            PostoController.prioridade= "preco";
-            chamaTelaPreco_Diesel();
-        break;
+            case R.id.botaoDiesel:
+                PostoController.prioridade= "preco";
+                chamaTelaPreco_Diesel();
+                break;
 
-        case R.id.botaoAlcool:
-            PostoController.prioridade= "preco";
-            chamaTelaPreco_Alcool();
-        break;
+            case R.id.botaoAlcool:
+                PostoController.prioridade= "preco";
+                chamaTelaPreco_Alcool();
+                break;
 
-        case R.id.botaoBuscaPorProximidade:
-            PostoController.prioridade= "distancia";
-            chamaTelaMaisProximo();
-            break;
+            case R.id.botaoBuscaPorProximidade:
+                PostoController.prioridade= "distancia";
+                chamaTelaMaisProximo();
+                break;
 
-        case R.id.logoff:
-            UserController u= new UserController();
-            u.retiraUsuarioDaSessao();
-            chamaTelaLogin();
-            break;
+            case R.id.logoff:
+                UserController u= new UserController();
+                u.retiraUsuarioDaSessao();
+                chamaTelaLogin();
+                break;
 
-        case R.id.spinner:
-            PostoController.servico= s.getSelectedItem().toString();
-        break;
+            case R.id.spinner:
+                //PostoController.servico= s.getSelectedItem().toString();
+                break;
+        }
     }
-}
 
     private void defineFiltroServico(){
         String text = s.getSelectedItem().toString();
-        Log.v("Spinner",s.getSelectedItem().toString());
-        if(!text.equals("selecione")){
+        Log.v("------>>>>>>>>>>>>==========================Spinner",s.getSelectedItem().toString());
+        //if(!text.equals("selecione")){
             PostoController.servico= text;
-        }
+        //}
     }
 
     private void chamaTelaPreco_Alcool(){
@@ -225,6 +212,7 @@ private void inicializaComponentes() {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            dialogCarregando();
             //progressBar2 = ProgressDialog.show(Busca_Posto.this, getApplicationContext().getString(R.string.title_activity_listar__postos), getApplicationContext().getString(R.string.corpo_texto__postos));
             //progressBar2.show();
         }
@@ -232,11 +220,12 @@ private void inicializaComponentes() {
         AlertDialog alert11;
         private void dialogCarregando(){
             AlertDialog.Builder builder1 = new AlertDialog.Builder(Busca_Posto.this);
-            builder1.setTitle("Carregando dados");
+            builder1.setTitle("Carregando lista");
             builder1.setMessage("por favor, aguarde...");
             builder1.setCancelable(true);
             alert11 = builder1.create();
             alert11.show();
+
         }
 
         @Override
@@ -257,6 +246,17 @@ private void inicializaComponentes() {
                 erro= true;
             }
 
+            try {
+                synchronized (this) {
+                    wait(1700);
+                    alert11.cancel();
+
+                }
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                //Log.d(TAG, "Waiting didnt work!!");
+                e.printStackTrace();
+            }
             //progressBar2.dismiss();
 
             return retorno;
@@ -266,19 +266,7 @@ private void inicializaComponentes() {
         protected void onPostExecute(Posto posto) {
 
             Log.v("asaas",">>>>");
-            try {
-                synchronized (this) {
-                    wait(1700);
-                    alert11.cancel();
-                    if(erro){
-                        exibeErroPostos();
-                    }
-                }
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                //Log.d(TAG, "Waiting didnt work!!");
-                e.printStackTrace();
-            }
+
         }
     }
 

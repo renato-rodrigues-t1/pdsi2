@@ -26,9 +26,9 @@ public class ErrorsCommander {
     public static void erroSemConexao(Context context){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setTitle("Erro de conexao");
-        builder1.setMessage("verifique sua conexao, por favor");
+        builder1.setMessage("verifique sua conexao, por favor e tente novamente");
         builder1.setCancelable(true);
-        builder1.setPositiveButton("tentar novamente",
+        builder1.setPositiveButton("ENTENDI",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

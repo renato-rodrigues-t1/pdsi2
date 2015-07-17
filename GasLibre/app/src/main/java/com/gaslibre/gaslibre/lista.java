@@ -28,10 +28,12 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
 
     private LatLng LtLg;
     private ImageButton logoff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
         setContentView(R.layout.activity_lista);
         initialiseComponents();
 
@@ -65,6 +67,7 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
     private void initialiseComponents(){
         logoff= (ImageButton) findViewById(R.id.logoff);
         logoff.setOnClickListener((View.OnClickListener) this);
+        TextView combustivel= (TextView) findViewById(R.id.combustivelLabel);
 
     }
 

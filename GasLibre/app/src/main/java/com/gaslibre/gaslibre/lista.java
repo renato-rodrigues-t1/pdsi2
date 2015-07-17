@@ -101,6 +101,7 @@ public class Lista extends ActionBarActivity implements View.OnClickListener{
             switch(PostoController.combustivelPesquisado) {
                 case 1:
                     preco.setText("R$ "+PostoController.listaOrdenadaPorPreco.get(i).getGasolina());
+                    
                     break;
 
                 case 2:

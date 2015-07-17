@@ -1,7 +1,9 @@
 package com.gaslibre.gaslibre;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,7 +35,6 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
     private Button buttonMaisProximo;
     private ImageButton logoff;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         //getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
@@ -51,6 +52,22 @@ public class Busca_Posto extends Activity implements View.OnClickListener {
         //se naum, direciona p tela de mapa
 
     }
+
+    private void exibeErroPostos(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Falha de acesso");
+        builder1.setMessage("Nao consegui acessar o servidor :/");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
 private void inicializaComponentes() {
 
 
@@ -153,6 +170,7 @@ private void inicializaComponentes() {
         ProgressDialog progressBar2;
         Context context;
         int combustivel;
+        boolean erro= false;
 
         private GetUserAsyncTaskPosto(Context context, int comb) {
             this.context = context;
@@ -166,6 +184,16 @@ private void inicializaComponentes() {
             //progressBar2.show();
         }
 
+        AlertDialog alert11;
+        private void dialogCarregando(){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(Busca_Posto.this);
+            builder1.setTitle("Carregando dados");
+            builder1.setMessage("por favor, aguarde...");
+            builder1.setCancelable(true);
+            alert11 = builder1.create();
+            alert11.show();
+        }
+
         @Override
         protected ArrayList<Posto> doInBackground(Void... params) {
             p.combustivelPesquisado= combustivel;
@@ -176,11 +204,12 @@ private void inicializaComponentes() {
 
             if(retorno!=null){
                 Log.v("Postos", "lista carregada");
+                erro= false;
                 chamaTelaLista();
 
             }else{
                 Log.v("Postos", "nulo");
-                //erroDeLogin();
+                erro= true;
             }
 
             //progressBar2.dismiss();
@@ -191,6 +220,20 @@ private void inicializaComponentes() {
 
         protected void onPostExecute(Posto posto) {
 
+            Log.v("asaas",">>>>");
+            try {
+                synchronized (this) {
+                    wait(1700);
+                    alert11.cancel();
+                    if(erro){
+                        exibeErroPostos();
+                    }
+                }
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                //Log.d(TAG, "Waiting didnt work!!");
+                e.printStackTrace();
+            }
         }
     }
 

@@ -24,6 +24,7 @@ public class RegistroScreen extends Activity implements View.OnClickListener{
     private EditText editUser;
     private EditText editSenha;
     private Button buttonRegistrar;
+    private Button buttonCancelar;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,6 +49,10 @@ public class RegistroScreen extends Activity implements View.OnClickListener{
                 }else{
                     exibeErroArrouba();
                 }
+                break;
+
+            case R.id.cancel:
+                chamaTelaDeLogin();
                 break;
         }
     }
@@ -87,8 +92,11 @@ public class RegistroScreen extends Activity implements View.OnClickListener{
         editNome= (EditText)findViewById(R.id.name);
 
         buttonRegistrar= (Button) findViewById(R.id.botaoRegistrar);
+        buttonCancelar= (Button) findViewById(R.id.cancel);
+
 
         buttonRegistrar.setOnClickListener((View.OnClickListener)this);
+        buttonCancelar.setOnClickListener((View.OnClickListener)this);
 
     }
 

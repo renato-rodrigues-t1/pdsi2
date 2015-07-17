@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-
 import android.app.Activity;
 
 import com.gaslibre.gaslibre.Control.User.UserController;
@@ -102,12 +101,12 @@ public class LoginScreen extends Activity implements View.OnClickListener {
                 String senhaEntrada= editSenha.getText().toString();
 
                     if (usuarioEntrado.length() > 0 && senhaEntrada.length() > 0) {
-                        if(usuarioEntrado.indexOf("@")>0) {
+                       // if(usuarioEntrado.indexOf("@")>0) {
                             GetUserAsyncTask getAsync = new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
                             getAsync.execute();
-                        }else{
-                            exibeErroArrouba();;
-                        }
+                        //}else{
+                           //exibeErroArrouba();
+                        //}
                     }
                 break;
 

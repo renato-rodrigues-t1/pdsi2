@@ -124,6 +124,59 @@ public class WebConnectorPosto {
         }
         return postos;
     }
+
+    public ArrayList<Posto> buscaPostosByService(String service) {
+        String result = "";
+        //notificacaoDao = new NotificacaoDAO(contexto);
+        //int idMensagem = notificacaoDao.getUltimoIdNotificacao();
+        String combustivelString = "";
+
+        String url = URLCommander.getInstance().getUrlBuscaServico(service);
+        Log.v("URL-------->",url);
+        ArrayList<Posto> postos = null;
+
+        try {
+            Object[] array = {url, "GET"};
+            result = (new GetRESTFile()).connect(array);
+
+            if (!result.equals("-1")) {
+                JSONArray jsonArray = new JSONArray(result);
+
+                if (jsonArray.length() == 0) {
+                    return postos;
+                }
+
+                postos= new ArrayList<Posto>();
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    Posto posto = new Posto();
+                    JSONObject objJson = new JSONObject(jsonArray.getString(i));
+
+                    // JsonObjects
+                    JSONObject objectPosto = objJson.getJSONObject("Posto");
+
+                    // Recebendo Dados
+                    posto.setId(Integer.parseInt(objectPosto.getString("Id")));
+                    posto.setName(objectPosto.getString("name").toString());
+                    posto.setBandeira(objectPosto.getString("bandeira").toString());
+                    posto.setGasolina((Double.parseDouble(objectPosto.getString("price_gas"))));
+                    posto.setEtanol(Double.parseDouble(objectPosto.getString("price_etanol")));
+                    posto.setDiesel(Double.parseDouble(objectPosto.getString("price_diesel")));
+                    posto.setServico(objectPosto.getString("service").toString());
+                    posto.setEndereco(objectPosto.getString("address").toString());
+                    posto.setClassificacao(objectPosto.getString("posto_classification").toString());
+                    posto.setCoordenateX(Double.parseDouble(objectPosto.getString("coordinate_x")));
+                    posto.setCoordenateY(Double.parseDouble(objectPosto.getString("coordinate_y")));
+
+                    postos.add(posto);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return postos;
+    }
 }
 
     /*public ArrayList<Posto> buscaPostosByServico(String servico){

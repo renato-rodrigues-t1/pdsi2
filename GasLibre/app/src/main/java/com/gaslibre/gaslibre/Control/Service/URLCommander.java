@@ -33,38 +33,6 @@ public class URLCommander {
         return serverURL;
     }
 
-    public String getURLUsers(){
-        return serverURL+urlUsers;
-    }
-
-    public String getUrlReports() {
-        return serverURL+urlReports;
-    }
-
-    public String getUrlConversations() {
-        return serverURL+urlConversations;
-    }
-
-    public String getUrlMessages() {
-        return serverURL+urlMessages;
-    }
-
-    public String getUrlInterests() {
-        return serverURL+urlInterests;
-    }
-
-    public String getUrlLanguages() {
-        return serverURL+urlLanguages;
-    }
-
-    public String getUrlMatches() {
-        return serverURL+urlMatches;
-    }
-
-    public String getURLUsersGetUser(){
-        return getURLUsers()+"getUser/";
-    }
-
     public String getURLLogin(String email, String senha){
         return serverURL+"gaslibre/gaslibreweb/users/doLogin/"+email+"/"+senha;
     }
@@ -74,7 +42,7 @@ public class URLCommander {
     }
 
     public String getUrlBuscaServico(String servico){
-        return serverURL+"pdsi/cont/Requisicao/buscaPostoPorComb?comb=";
+        return serverURL+"gaslibre/gaslibreweb/postos/getAllPostsByServico/"+servico;
     }
 
     public String getURLRegistraUser(User u){

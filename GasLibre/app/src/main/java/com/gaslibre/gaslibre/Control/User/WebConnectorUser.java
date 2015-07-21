@@ -107,7 +107,7 @@ public class WebConnectorUser {
 
     public boolean registraUserServer(User user){
 
-        String urlLogin= URLCommander.getInstance().getURLRegistraUser(user);
+        String urlLogin= URLCommander.getInstance().getURLRegistraUser();
         String result = "";
         User userReturn= null;
 
@@ -125,6 +125,37 @@ public class WebConnectorUser {
             return false;
         }
         return false;
+    }
+
+    public boolean addUserServer(User user) {
+        int retorno = -1;
+        JSONObject jsonObject = new JSONObject();
+        String result = "";
+
+        try {
+            jsonObject.put("name", user.getName());
+            jsonObject.put("email", user.getEmail());
+            jsonObject.put("senha", user.getSenha());
+
+            String url = URLCommander.getInstance().getURLRegistraUser();
+            Log.v("NovaAtividade-------- ", url);
+            String metodo = "POST";
+
+            Object[] array = { jsonObject, url, metodo };
+
+            result = (new SetRESTFile()).connect(array);
+            retorno = Integer.parseInt(result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            retorno = -1;
+        }
+        if(retorno==-1){
+            return false;
+        }else{
+            return true;
+        }
+
     }
 }
 /*

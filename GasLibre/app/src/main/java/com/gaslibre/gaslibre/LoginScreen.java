@@ -63,7 +63,7 @@ public class LoginScreen extends Activity implements View.OnClickListener {
     private void exibeErroLogin(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setTitle("Falha de Login");
-        builder1.setMessage("verifique se seu email e senhas estao corretos");
+        builder1.setMessage("verifique se seu email e senha estao corretos");
         builder1.setCancelable(true);
         builder1.setPositiveButton("tentar novamente",
                 new DialogInterface.OnClickListener() {
@@ -101,12 +101,14 @@ public class LoginScreen extends Activity implements View.OnClickListener {
                 String senhaEntrada= editSenha.getText().toString();
 
                     if (usuarioEntrado.length() > 0 && senhaEntrada.length() > 0) {
-                       // if(usuarioEntrado.indexOf("@")>0) {
+                       if(usuarioEntrado.indexOf("@")>0) {
                             GetUserAsyncTask getAsync = new GetUserAsyncTask(this, usuarioEntrado, senhaEntrada);
                             getAsync.execute();
-                        //}else{
-                           //exibeErroArrouba();
-                        //}
+                        }else{
+                           exibeErroArrouba();
+                        }
+                    }else{
+                        exibeErroCamposObrigatorios();
                     }
                 break;
 
@@ -119,7 +121,23 @@ public class LoginScreen extends Activity implements View.OnClickListener {
 
     private void exibeErroArrouba(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Ops, seu email nem contem o caracter '@' rsrs");
+        builder1.setTitle("Email invalido");
+        builder1.setMessage("Ops, seu email não contem o caracter '@' rsrs");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("tentar novamente",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    private void exibeErroCamposObrigatorios(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Campos Vazios");
+        builder1.setMessage("Por favor, preencha todos os campos");
         builder1.setCancelable(true);
         builder1.setPositiveButton("tentar novamente",
                 new DialogInterface.OnClickListener() {

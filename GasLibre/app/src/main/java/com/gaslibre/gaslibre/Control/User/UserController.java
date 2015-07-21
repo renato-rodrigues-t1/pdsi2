@@ -48,7 +48,7 @@ public class UserController {
     }
 
     public boolean registraUsuarioServer(User user, Context context){
-        if(WebConnectorUser.getInstance(context).registraUserServer(user))
+        if(WebConnectorUser.getInstance(context).addUserServer(user))
             return true;
         return false;
     }

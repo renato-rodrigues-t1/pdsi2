@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.gaslibre.gaslibre.Model.Posto;
 import java.util.ArrayList;
-
+import com.gaslibre.gaslibre.Control.Service.SetRESTFile;
 /**
  * Created by renato on 5/23/15.
  */

@@ -45,7 +45,7 @@ public class URLCommander {
         return serverURL+"gaslibre/gaslibreweb/postos/getAllPostsByServico/"+servico;
     }
 
-    public String getURLRegistraUser(User u){
-        return serverURL+"gaslibre/gaslibreweb/users/"+u.getName()+"/"+u.getEmail()+"/"+u.getSenha();
+    public String getURLRegistraUser(){
+        return serverURL+"gaslibre/gaslibreweb/users/addUser/";
     }
 }
